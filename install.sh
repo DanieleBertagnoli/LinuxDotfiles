@@ -69,7 +69,7 @@ check_for_input()
 }
 
 # Declare all the programs
-declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Remmina" "Docker" "Docker Desktop")
+declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Remmina" "Docker" "Docker Desktop" "Spotify" "Telegram Desktop")
 
 # Create the tmp directory where the .deb file will be temporary stored
 mkdir tmp_deb_files
@@ -101,6 +101,8 @@ for val in ${program_array[@]}; do
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ; sudo apt-get update ; sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y ;;
             
             "Docker Desktop") wget -O docker_desktop.deb "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.20.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" ; sudo apt install ./docker_desktop.deb -y;;
+            "Spotify") sudo snap install spotify ;;
+            "Telegram Desktop") sudo snap install telegram-desktop ;;
 
         esac
 
