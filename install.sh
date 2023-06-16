@@ -39,6 +39,10 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 50
 gsettings set org.gnome.shell.extensions.dash-to-dock unity-backlit-items true
 gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.8
 
+DIR="$(pwd)/wallpapers"
+PIC=$(ls $DIR/wallpaper_1.png | shuf -n1)
+gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
+
 
 ######################
 #                    #
