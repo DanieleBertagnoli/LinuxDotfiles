@@ -23,7 +23,7 @@ read  -n 1
 
 # Copy the themes into the system's folders
 sudo cp -r icons/* /usr/share/icons
-sudo cp -r themes/* /usr/share/
+sudo cp -r themes/* /usr/share/themes
 
 # Apply themes
 dconf write /org/gnome/desktop/interface/cursor-theme "'Qogir-cursors'"
@@ -51,7 +51,7 @@ gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
 ######################
 
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 
 check_for_input()
 {
