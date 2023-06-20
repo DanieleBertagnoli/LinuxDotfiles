@@ -69,7 +69,7 @@ check_for_input()
 }
 
 # Declare all the programs
-declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Remmina" "Docker" "Docker Desktop" "Spotify" "Telegram Desktop")
+declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Remmina" "Docker" "Docker Desktop" "Spotify" "Telegram Desktop" "Tailscale")
 
 # Create the tmp directory where the .deb file will be temporary stored
 mkdir tmp_deb_files
@@ -103,6 +103,7 @@ for val in ${program_array[@]}; do
             "Docker Desktop") wget -O docker_desktop.deb "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.20.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" ; sudo apt install ./docker_desktop.deb -y;;
             "Spotify") sudo snap install spotify ;;
             "Telegram Desktop") sudo snap install telegram-desktop ;;
+            "Tailscale") curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null ; curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list ; sudo apt-get update ; sudo apt-get install tailscale ;;
 
         esac
 
