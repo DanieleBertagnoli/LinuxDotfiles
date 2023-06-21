@@ -32,12 +32,24 @@ dconf write /org/gnome/desktop/interface/gtk-theme "'Tokyo'"
 dconf write /org/gnome/shell/extensions/user-theme/name "'Sweet-Dark'"
 
 # Edit Dock
-gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
-gsettings set org.gnome.shell.extensions.dash-to-dock transparency-mode FIXED
-gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 50
-gsettings set org.gnome.shell.extensions.dash-to-dock unity-backlit-items true
-gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.8
+echo "Do you want to edit the dock (WARNING: YOU CAN DO IT ONLY IF YOU HAVE INSTALLED DASH TO DOCK) ? [y/n]"
+while true; do
+    read -n 1 response
+    case $response in 
+        [yY]) echo ;;
+        [nN]) echo ;;
+        *) echo ; echo "Invalid input, enter [y/n]" ;;
+    esac
+done
+
+if [ $response -eq 0 ]; then 
+    gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
+    gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
+    gsettings set org.gnome.shell.extensions.dash-to-dock transparency-mode FIXED
+    gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 50
+    gsettings set org.gnome.shell.extensions.dash-to-dock unity-backlit-items true
+    gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.8
+fi
 
 DIR="$(pwd)/wallpapers"
 PIC=$(ls $DIR/wallpaper_1.png | shuf -n1)
