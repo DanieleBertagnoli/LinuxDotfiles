@@ -36,13 +36,13 @@ echo "Do you want to edit the dock (WARNING: YOU CAN DO IT ONLY IF YOU HAVE INST
 while true; do
     read -n 1 response
     case $response in 
-        [yY]) echo ;;
-        [nN]) echo ;;
+        [yY]) edit=0 ;;
+        [nN]) edit=1 ;;
         *) echo ; echo "Invalid input, enter [y/n]" ;;
     esac
 done
 
-if [ $response -eq 0 ]; then 
+if [ $edit -eq 0 ]; then 
     gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
     gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
     gsettings set org.gnome.shell.extensions.dash-to-dock transparency-mode FIXED
