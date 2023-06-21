@@ -36,8 +36,8 @@ echo "Do you want to edit the dock (WARNING: YOU CAN DO IT ONLY IF YOU HAVE INST
 while true; do
     read -n 1 response
     case $response in 
-        [yY]) edit=0 ;;
-        [nN]) edit=1 ;;
+        [yY]) edit=0 ; break ;;
+        [nN]) edit=1 ; break ;;
         *) echo ; echo "Invalid input, enter [y/n]" ;;
     esac
 done
