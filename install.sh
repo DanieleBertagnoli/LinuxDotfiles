@@ -63,7 +63,7 @@ gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
 ######################
 
 sudo apt update
-sudo apt upgrade -y
+sudo apt full-upgrade -y
 
 check_for_input()
 {
