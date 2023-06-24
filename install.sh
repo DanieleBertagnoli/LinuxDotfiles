@@ -81,7 +81,7 @@ check_for_input()
 }
 
 # Declare all the programs
-declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Remmina" "Docker" "Docker Desktop" "Spotify" "Telegram Desktop" "Tailscale")
+declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Remmina" "Docker" "Docker Desktop" "Spotify" "Telegram Desktop" "Tailscale" "Latex Compiler")
 
 # Create the tmp directory where the .deb file will be temporary stored
 mkdir tmp_deb_files
@@ -116,6 +116,7 @@ for val in ${program_array[@]}; do
             "Spotify") sudo snap install spotify ;;
             "Telegram Desktop") sudo snap install telegram-desktop ;;
             "Tailscale") curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null ; curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list ; sudo apt-get update ; sudo apt-get install tailscale ;;
+            "Latex Compiler") sudo apt install texlive-science texlive-latex-extra texlive-extra-utils latexmk texlive-publishers -y ;;
 
         esac
 
