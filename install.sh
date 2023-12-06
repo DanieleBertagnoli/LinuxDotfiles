@@ -139,9 +139,3 @@ rm -rf tmp_deb_files
 
 sudo echo "alias c='clear'" >> ~/.bashrc
 sudo echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
-alias rasp_connect='ssh -p 700 pi@100.82.7.120'
-alias rasp_update='bash ~/Documents/PersonalProjects/BashScripts/rasp_update.sh'
-alias up='bash ~/Documents/PersonalProjects/BashScripts/automanage.sh'
-alias cs='cd ~/Documents/University/ComputerScience'
-alias cs2='cd ~/Documents/University/ComputerScience/SY/FS'
-alias off='sudo poweroff'
