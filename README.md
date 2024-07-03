@@ -1,11 +1,10 @@
-# UbuntuSetup
+# Linux Dotfiles 🐧
+These are my personal dotfiles for setting up fastly my systems after a fresh installation. In each distribution's folder a `install.sh` file is available, these are designed to guide you step-by-step during the installation as some manual steps may be required. These dotfiles are useful to install quickly some essential programs and themes to make your system prettier.
 
-## **Manual Steps**
+Please feel free to open issues or contact me to discuss about possible bugs, problems or improvements. 
 
-Unfortunately, you have to do some manual steps to get all the system setupped.
-
-### **Enable Extensions**
-The script should have installed *Extension Manager*, so open it and click on the "Browse" tab. Then search for "UserThemes" and install it. Additionally we recommand to instal also the two exstensions "Dash To Dock" and "Dash To Dock Animator".
+## Ubuntu dotfiles
+These dotfiles are used to set up Ubuntu systems (you can slightly modify some commands to adapt it to any Debian-based distribution). 
 
 ### **Select Themes**
 

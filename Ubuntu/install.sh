@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Switch to X11
-echo "It's recommended to switch from Wayland to X11 to achieve a better compatibility"
-sudo gedit /etc/gdm3/custom.conf
+echo "It's recommended to switch from Wayland to X11 to achieve a better compatibility. Uncomment the option 'WaylandEnable' and set it to 'false'."
+sudo gedit /etc/gdm3/custom.conf 2&>/etc/null
 
 ####################
 #                  #
@@ -16,10 +16,43 @@ sudo add-apt-repository universe
 sudo apt install gnome-tweaks -y
 sudo apt install gnome-shell-extension-manager -y
 
-# Wait that all the manual steps are completed
-echo "Hi! Now you have to complete the manual steps specified in the README.md file. Don't worry, it takes up to 2 minutes :)"
-echo "Please press ANY key to contiue..."
-read  -n 1
+# Set the UUID for the extension you want to install
+EXTENSION_UUID="user-theme@gnome-shell-extensions.gcampax.github.com"
+
+# Get the GNOME Shell version
+GNOME_VERSION=$(gnome-shell --version | awk '{print $3}')
+
+# Create the extensions directory if it doesn't exist
+mkdir -p ~/.local/share/gnome-shell/extensions
+
+# Get the extension metadata URL
+METADATA_URL="https://extensions.gnome.org/extension-info/?uuid=${EXTENSION_UUID}&shell_version=${GNOME_VERSION}"
+
+# Fetch the extension metadata
+METADATA=$(curl -s "$METADATA_URL")
+
+# Extract the download URL from the metadata
+DOWNLOAD_URL=$(echo "$METADATA" | grep -oP '(?<="download_url": ")[^"]+')
+
+# Download and extract the extension
+if [ -n "$DOWNLOAD_URL" ]; then
+  EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions-brutte/$EXTENSION_UUID"
+  mkdir -p $EXTENSION_DIR
+  wget -O $EXTENSION_DIR/ext.zip "https://extensions.gnome.org$DOWNLOAD_URL"
+  unzip $EXTENSION_DIR/ext.zip
+  rm $EXTENSION_DIR/ext.zip
+  echo "Extension installed to $EXTENSION_DIR"
+else
+  echo "Failed to retrieve the download URL."
+fi
+
+# Restart GNOME Shell (this may log you out, use with caution)
+gnome-shell --replace &
+
+# # Wait that all the manual steps are completed
+# echo "Hi! Now you have to complete the manual steps specified in the README.md file. Don't worry, it takes up to 2 minutes."
+# echo "Please press ANY key to contiue..."
+# read -n 1
 
 # Copy the themes into the system's folders
 sudo cp -r icons/* /usr/share/icons
@@ -30,26 +63,6 @@ dconf write /org/gnome/desktop/interface/cursor-theme "'Qogir-cursors'"
 dconf write /org/gnome/desktop/interface/icon-theme "'Kora'"
 dconf write /org/gnome/desktop/interface/gtk-theme "'Tokyo'"
 dconf write /org/gnome/shell/extensions/user-theme/name "'Sweet-Dark'"
-
-# Edit Dock
-echo "Do you want to edit the dock (WARNING: YOU CAN DO IT ONLY IF YOU HAVE INSTALLED DASH TO DOCK) ? [y/n]"
-while true; do
-    read -n 1 response
-    case $response in 
-        [yY]) edit=0 ; break ;;
-        [nN]) edit=1 ; break ;;
-        *) echo ; echo "Invalid input, enter [y/n]" ;;
-    esac
-done
-
-if [ $edit -eq 0 ]; then 
-    gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
-    gsettings set org.gnome.shell.extensions.dash-to-dock dock-position BOTTOM
-    gsettings set org.gnome.shell.extensions.dash-to-dock transparency-mode FIXED
-    gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 50
-    gsettings set org.gnome.shell.extensions.dash-to-dock unity-backlit-items true
-    gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.8
-fi
 
 DIR="$(pwd)/wallpapers"
 PIC=$(ls $DIR/wallpaper_1.png | shuf -n1)
@@ -68,7 +81,7 @@ sudo apt full-upgrade -y
 check_for_input()
 {
     local program_name=$1
-    echo "Do you want to install $program_name ? [y/n]"
+    echo -e "\nDo you want to install $program_name ? [y/n]"
     while true; do
         read -n 1 response
         case $response in 
@@ -81,7 +94,7 @@ check_for_input()
 }
 
 # Declare all the programs
-declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Docker" "Docker Desktop" "Spotify" "Telegram Desktop" "Tailscale" "Latex Compiler")
+declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Docker" "Spotify" "Telegram Desktop" "Tailscale" "Latex Compiler")
 
 # Create the tmp directory where the .deb file will be temporary stored
 mkdir tmp_deb_files
@@ -111,7 +124,6 @@ for val in ${program_array[@]}; do
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ; sudo apt-get update ; sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y ;;
             
-            "Docker Desktop") wget -O docker_desktop.deb "https://desktop.docker.com/linux/main/amd64/docker-desktop-4.20.1-amd64.deb?utm_source=docker&utm_medium=webreferral&utm_campaign=docs-driven-download-linux-amd64" ; sudo apt install ./docker_desktop.deb -y;;
             "Spotify") curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg ; echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list ; sudo apt-get update && sudo apt-get install spotify-client ;;
             "Telegram Desktop") sudo apt install telegram-desktop -y ;;
             "Tailscale") curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null ; curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list ; sudo apt-get update ; sudo apt-get install tailscale ;;
@@ -139,3 +151,64 @@ rm -rf tmp_deb_files
 
 sudo echo "alias c='clear'" >> ~/.bashrc
 sudo echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
+
+
+###################
+#                 #
+#   Remove snap   #
+#                 #
+###################
+
+echo -e "Do you want remove snap and all its packages?\nWARNING: This option is recommended only to expert users."
+
+while true; do
+    read -n 1 response
+    case $response in 
+        [yY]) echo ; response=0 ;;
+        [nN]) echo ; response=1 ;;
+        *) echo ; echo "Invalid input, enter [y/n]" ;;
+    esac
+done
+
+while [ $response -eq 1 ]; do
+
+    # List all installed snap packages
+    snap_list=$(snap list | awk 'NR>1 {print $1}')
+        
+    if [ -z "$snap_list" ]; then
+        echo "No more snap packages to remove."
+        break
+    fi
+        
+    # Attempt to remove each snap package
+    for snap in $snap_list; do
+        echo "Attempting to remove snap package: $snap"
+        sudo snap remove --purge "$snap"
+        if [ $? -eq 0 ]; then
+            echo "Successfully removed: $snap"
+        else
+            echo "Failed to remove: $snap. It might be required by other packages."
+        fi
+    done
+
+done
+
+# Remove snapd
+sudo apt remove --autoremove snapd
+
+sudo echo "Package: snapd
+Pin: release a=*
+Pin-Priority: -10" >>/etc/apt/preferences.d/nosnap.pref
+
+sudo apt update
+
+# Install Firefox using the APT repository
+sudo add-apt-repository ppa:mozillateam/ppa
+sudo apt update
+sudo apt install -t 'o=LP-PPA-mozillateam' firefox
+
+echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+sudo echo "Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 501" >>/etc/apt/preferences.d/mozillateamppa
