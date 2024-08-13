@@ -21,10 +21,11 @@ cp CustomConf/post.sh ~/dotfiles-versions/
 prompt_install() {
     local package=$1
     local package_name=$2
+    local cmd=$3
     echo -e "\n\nDo you want to install $package_name? (y/n) "
     read -r choice
     case "$choice" in 
-        y|Y ) sudo pacman -S --noconfirm "$package";;
+        y|Y ) sudo $cmd -S --noconfirm "$package";;
         * ) echo "Skipping $package_name installation.";;
     esac
 }
@@ -48,8 +49,9 @@ prompt_remove() {
 }
 
 # Install packages with prompt
-prompt_install gnome-keyring "GNOME Os Keyring"
-prompt_install spotify-launcher Spotify
+prompt_install gnome-keyring "GNOME Os Keyring" pacman
+prompt_install spotify-launcher Spotify pacman
+prompt_install vescord "Vesktop (Discord Wayland Porting)" yay
 
 # Remove packages with prompt
 prompt_remove starship Starship
