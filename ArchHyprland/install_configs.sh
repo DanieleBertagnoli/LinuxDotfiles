@@ -57,3 +57,10 @@ prompt_remove neovim Neovim
 
 # Replace the line in wallpaper.sh
 # sed -i 's/wal -q -i $used_wallpaper/wal -q -i $used_wallpaper --saturate 0.8/' ~/.config/hypr/scripts/wallpaper.sh
+
+# Install packages for enabling screen-sharing
+sudo pacman -S --noconfirm pipewire wireplumber 
+
+echo -e "\n\nPress Y to all (also to those part in which the system will ask for conflicts packages removal)"
+yay -S xdg-desktop-portal-hyprland-git
+sudo pacman -S grim slurp
