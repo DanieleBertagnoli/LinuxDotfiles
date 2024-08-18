@@ -28,6 +28,7 @@ sleep 1
 echo "2"
 sleep 1
 echo "1"
+sleep 1
 clear
 
 ###################
@@ -40,9 +41,9 @@ echo -e "Do you want remove snap and all its packages? [y/n]\nWARNING: This opti
 while true; do
     read -n 1 response
     case $response in 
-        [yY]) echo ; response=0 ;;
-        [nN]) echo ; response=1 ;;
-        *) echo ; echo "Invalid input, enter [y/n]" ;;
+        [yY]) response=0 ;;
+        [nN]) response=1 ;;
+        *) echo "Invalid input $response, enter [y/n]" ;;
     esac
 done
 
