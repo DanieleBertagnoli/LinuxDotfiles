@@ -72,9 +72,9 @@ done
 # Remove snapd
 sudo apt remove --autoremove snapd
 
-sudo echo "Package: snapd
+sudo bash -c 'echo "Package: snapd
 Pin: release a=*
-Pin-Priority: -10" >>/etc/apt/preferences.d/nosnap.pref
+Pin-Priority: -10" >> /etc/apt/preferences.d/nosnap.pref'
 
 sudo apt update
 
@@ -85,9 +85,9 @@ sudo apt install -t 'o=LP-PPA-mozillateam' firefox
 
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
-sudo echo "Package: firefox*
+sudo bash -c 'echo "Package: firefox*
 Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 501" >>/etc/apt/preferences.d/mozillateamppa
+Pin-Priority: 501" >> /etc/apt/preferences.d/mozillateamppa'
 
 
 
