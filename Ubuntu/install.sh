@@ -65,36 +65,37 @@ while [ $response -eq 1 ]; do
 
 done
 
-# Remove snapd
-sudo apt remove --autoremove snapd
+if [ $response -eq 1 ]; then
+    # Remove snapd
+    sudo apt remove --autoremove snapd
 
-sudo bash -c 'echo "Package: snapd
-Pin: release a=*
-Pin-Priority: -10" >> /etc/apt/preferences.d/nosnap.pref'
+    sudo bash -c 'echo "Package: snapd
+    Pin: release a=*
+    Pin-Priority: -10" >> /etc/apt/preferences.d/nosnap.pref'
 
-sudo apt update
+    sudo apt update
 
-# Install Firefox using the APT repository
-sudo add-apt-repository ppa:mozillateam/ppa
-sudo apt update
-sudo apt install -t 'o=LP-PPA-mozillateam' firefox
+    # Install Firefox using the APT repository
+    sudo add-apt-repository ppa:mozillateam/ppa
+    sudo apt update
+    sudo apt install -t 'o=LP-PPA-mozillateam' firefox
 
-echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+    echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
-sudo bash -c 'echo "Package: firefox*
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 501" >> /etc/apt/preferences.d/mozillateamppa'
+    sudo bash -c 'echo "Package: firefox*
+    Pin: release o=LP-PPA-mozillateam
+    Pin-Priority: 501" >> /etc/apt/preferences.d/mozillateamppa'
 
-echo -e "\n\n\n SYSTEM FULLY UPDATED... Wait 3 seconds"
-sleep 1
-echo "3"
-sleep 1
-echo "2"
-sleep 1
-echo "1"
-sleep 1
+    echo -e "\n\n\n SYSTEM FULLY UPDATED... Wait 3 seconds"
+    sleep 1
+    echo "3"
+    sleep 1
+    echo "2"
+    sleep 1
+    echo "1"
+    sleep 1
+fi
 clear
-
 
 
 ####################
@@ -203,9 +204,8 @@ if [[ $response -eq 1 ]]; then
     sleep 1
     echo "1"
     sleep 1
-    clear
 fi
-
+clear
 
 
 #######################
