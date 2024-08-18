@@ -38,8 +38,8 @@ while true; do
     read -r -n 1 response
     echo  # Moves to a new line after input
     case $response in 
-        [yY]) response=0; break ;;
-        [nN]) response=1; break ;;
+        [yY]) response=1; break ;;
+        [nN]) response=0; break ;;
         *) echo "Invalid input '$response', enter [y/n]" ;;
     esac
 done
@@ -86,7 +86,7 @@ if [ $response -eq 1 ]; then
     Pin: release o=LP-PPA-mozillateam
     Pin-Priority: 501" >> /etc/apt/preferences.d/mozillateamppa'
 
-    echo -e "\n\n\n SYSTEM FULLY UPDATED... Wait 3 seconds"
+    echo -e "\n\n\n SNAP REMOVED... Wait 3 seconds"
     sleep 1
     echo "3"
     sleep 1
