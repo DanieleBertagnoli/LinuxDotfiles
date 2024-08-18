@@ -36,7 +36,7 @@ clear
 
 echo -e "Do you want to remove snap and all its packages? [y/n]\nWARNING: This option is recommended only to expert users."
 while true; do
-    read -r -n 1 response
+    read -r response
     echo  # Moves to a new line after input
     case $response in 
         [yY]) response=1; break ;;
@@ -107,7 +107,7 @@ clear
 
 echo -e "Do you want to install and apply additional themes? [y/n]"
 while true; do
-    read -r -n 1 response
+    read -r response
     echo  # Moves to a new line after input
     case $response in 
         [yY]) response=1; break ;;
@@ -170,7 +170,7 @@ if [[ $response -eq 1 ]]; then
     echo -e "\n\nPick a number between 1 and 10 to select the wallpaper (their location is Ubuntu/Wallpapers). Enter 0 to keep the Ubuntu default one."
 
     while true; do
-        read -r -n 1 response
+        read -r response
         echo  # Moves to a new line after input
 
         if [[ "$response" =~ ^[0-9]+$ ]]; then  # Check if input is a number
@@ -221,7 +221,7 @@ check_for_input()
     local program_name=$1
     echo -e "\nDo you want to install $program_name ? [y/n]"
     while true; do
-        read -n 1 response
+        read -r response
         case $response in 
             [yY]) echo ; return 0 ;;
             [nN]) echo ; return 1 ;;
@@ -291,7 +291,7 @@ rm -rf tmp_deb_files
 
 echo -e "Do you want to create additional aliases in the .bashrc configuration? [y/n]"
 while true; do
-    read -r -n 1 response
+    read -r response
     echo  # Moves to a new line after input
     case $response in 
         [yY]) response=0; break ;;
@@ -301,9 +301,13 @@ while true; do
 done
 
 if [[ $response -eq 1 ]]; then 
-    sudo bash -c 'echo "########################\n#                      #\n#   Dotfiles Aliases   #\n#                      #\n########################\n\n" >> ~/.bashrc'
+    echo "########################\n#                      #\n#   Dotfiles Aliases   #\n#                      #\n########################\n\n" >> ~/.bashrc
 
-    sudo echo "alias c='clear'" >> ~/.bashrc
-    sudo echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
-    sudo echo "alias up='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean -y; sudo apt-get autoremove -y;'" >> ~/.bashrc
+    echo "alias c='clear'" >> ~/.bashrc
+    echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
+    echo "alias up='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean -y; sudo apt-get autoremove -y;'" >> ~/.bashrc
+    source ~/.bashrc
 fi
+clear
+
+echo "Dotfiles successfully installed, we suggest to reboot the system. Bye ;)".
