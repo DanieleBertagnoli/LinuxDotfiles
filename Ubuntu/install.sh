@@ -1,15 +1,88 @@
 #!/bin/bash
 
+#               .-. 
+#         .-'``(|||) 
+#      ,`\ \    `-`.                 88                         88 
+#     /   \ '``-.   `                88                         88 
+#   .-.  ,       `___:      88   88  88,888,  88   88  ,88888, 88888  88   88 
+#  (:::) :        ___       88   88  88   88  88   88  88   88  88    88   88 
+#   `-`  `       ,   :      88   88  88   88  88   88  88   88  88    88   88 
+#     \   / ,..-`   ,       88   88  88   88  88   88  88   88  88    88   88 
+#      `./ /    .-.`        '88888'  '88888'  '88888'  88   88  '8888 '88888' 
+#         `-..-(   ) 
+#               `-` 
+
 # Switch to X11
-echo "It's recommended to switch from Wayland to X11 to achieve a better compatibility. Uncomment the option 'WaylandEnable' and set it to 'false'."
-sudo gedit /etc/gdm3/custom.conf 2&>/etc/null
+# echo "It's recommended to switch from Wayland to X11 to achieve a better compatibility. Uncomment the option 'WaylandEnable' and set it to 'false'."
+# sudo gedit /etc/gdm3/custom.conf 2&>/etc/null
+
+sudo apt update
+sudo apt upgrade -y
+
+###################
+#                 #
+#   Remove snap   #
+#                 #
+###################
+
+echo -e "Do you want remove snap and all its packages? [y/n]\nWARNING: This option is recommended only to expert users."
+while true; do
+    read -n 1 response
+    case $response in 
+        [yY]) echo ; response=0 ;;
+        [nN]) echo ; response=1 ;;
+        *) echo ; echo "Invalid input, enter [y/n]" ;;
+    esac
+done
+
+while [ $response -eq 1 ]; do
+
+    # List all installed snap packages
+    snap_list=$(snap list | awk 'NR>1 {print $1}')
+        
+    if [ -z "$snap_list" ]; then
+        echo "No more snap packages to remove."
+        break
+    fi
+        
+    # Attempt to remove each snap package
+    for snap in $snap_list; do
+        echo "Attempting to remove snap package: $snap"
+        sudo snap remove --purge "$snap"
+        if [ $? -eq 0 ]; then
+            echo "Successfully removed: $snap"
+        fi
+    done
+
+done
+
+# Remove snapd
+sudo apt remove --autoremove snapd
+
+sudo echo "Package: snapd
+Pin: release a=*
+Pin-Priority: -10" >>/etc/apt/preferences.d/nosnap.pref
+
+sudo apt update
+
+# Install Firefox using the APT repository
+sudo add-apt-repository ppa:mozillateam/ppa
+sudo apt update
+sudo apt install -t 'o=LP-PPA-mozillateam' firefox
+
+echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+sudo echo "Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 501" >>/etc/apt/preferences.d/mozillateamppa
+
+
 
 ####################
 #                  #
 #   Themes Setup   #
 #                  #
 ####################
-
 
 # Install Gnome-Tweaks and Gnome-Shell-Extension
 sudo add-apt-repository universe
@@ -69,14 +142,12 @@ PIC=$(ls $DIR/wallpaper_1.png | shuf -n1)
 gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
 
 
-######################
-#                    #
-#   Programs Setup   #
-#                    #
-######################
 
-sudo apt update
-sudo apt full-upgrade -y
+#######################
+#                     #
+#   Useful Programs   #
+#                     #
+#######################
 
 check_for_input()
 {
@@ -94,7 +165,7 @@ check_for_input()
 }
 
 # Declare all the programs
-declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Docker" "Spotify" "Telegram Desktop" "Tailscale" "Latex Compiler")
+declare -a program_array=("Discord" "Visual Studio Code" "Bitwarden" "Docker" "Spotify" "Tailscale" "Latex Compiler")
 
 # Create the tmp directory where the .deb file will be temporary stored
 mkdir tmp_deb_files
@@ -117,18 +188,21 @@ for val in ${program_array[@]}; do
         case $val in
 
             "Discord") wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb" ; sudo apt install ./discord.deb -y ;;
+            
             "Visual Studio Code") wget -O vscode.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" ; sudo apt install ./vscode.deb -y ;;
+            
             "Bitwarden") wget "https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=deb" -O bitwarden.deb ; sudo apt install ./bitwarden.deb -y ;;
+            
             "Docker") sudo apt-get install ca-certificates curl gnupg -y ; sudo install -m 0755 -d /etc/apt/keyrings ; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg ; sudo chmod a+r /etc/apt/keyrings/docker.gpg ; echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ; sudo apt-get update ; sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y ;;
+                        "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+                        "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+                        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ; sudo apt-get update ; sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y ;;
             
             "Spotify") curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg ; echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list ; sudo apt-get update && sudo apt-get install spotify-client ;;
-            "Telegram Desktop") sudo apt install telegram-desktop -y ;;
+            
             "Tailscale") curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null ; curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list ; sudo apt-get update ; sudo apt-get install tailscale ;;
+            
             "Latex Compiler") sudo apt install texlive-science texlive-latex-extra texlive-extra-utils latexmk texlive-publishers -y ;;
-
         esac
 
     fi
@@ -143,72 +217,14 @@ rm -rf tmp_deb_files
 
 
 
-##########################
-#                        #
-#   Add useful aliases   #
-#                        #
-##########################
+########################
+#                      #
+#   Dotfiles Aliases   #
+#                      #
+########################
+
+sudo bash -c 'echo "########################\n#                      #\n#   Dotfiles Aliases   #\n#                      #\n########################\n\n" >> ~/.bashrc'
 
 sudo echo "alias c='clear'" >> ~/.bashrc
 sudo echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
-
-
-###################
-#                 #
-#   Remove snap   #
-#                 #
-###################
-
-echo -e "Do you want remove snap and all its packages?\nWARNING: This option is recommended only to expert users."
-
-while true; do
-    read -n 1 response
-    case $response in 
-        [yY]) echo ; response=0 ;;
-        [nN]) echo ; response=1 ;;
-        *) echo ; echo "Invalid input, enter [y/n]" ;;
-    esac
-done
-
-while [ $response -eq 1 ]; do
-
-    # List all installed snap packages
-    snap_list=$(snap list | awk 'NR>1 {print $1}')
-        
-    if [ -z "$snap_list" ]; then
-        echo "No more snap packages to remove."
-        break
-    fi
-        
-    # Attempt to remove each snap package
-    for snap in $snap_list; do
-        echo "Attempting to remove snap package: $snap"
-        sudo snap remove --purge "$snap"
-        if [ $? -eq 0 ]; then
-            echo "Successfully removed: $snap"
-        else
-            echo "Failed to remove: $snap. It might be required by other packages."
-        fi
-    done
-
-done
-
-# Remove snapd
-sudo apt remove --autoremove snapd
-
-sudo echo "Package: snapd
-Pin: release a=*
-Pin-Priority: -10" >>/etc/apt/preferences.d/nosnap.pref
-
-sudo apt update
-
-# Install Firefox using the APT repository
-sudo add-apt-repository ppa:mozillateam/ppa
-sudo apt update
-sudo apt install -t 'o=LP-PPA-mozillateam' firefox
-
-echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
-
-sudo echo "Package: firefox*
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 501" >>/etc/apt/preferences.d/mozillateamppa
+sudo echo "alias up='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean -y; sudo apt-get autoremove -y;'" >> ~/.bashrc
