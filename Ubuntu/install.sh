@@ -184,7 +184,7 @@ if [[ $response -eq 1 ]]; then
                     gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
                     break
                 else
-                    echo "Wallpaper $response does not exist."
+                    echo "wallpaper_$response does not exist."
                 fi
             else 
                 echo "$response is an invalid input"
