@@ -12,10 +12,6 @@
 #         `-..-(   ) 
 #               `-` 
 
-# Switch to X11
-# echo "It's recommended to switch from Wayland to X11 to achieve a better compatibility. Uncomment the option 'WaylandEnable' and set it to 'false'."
-# sudo gedit /etc/gdm3/custom.conf 2&>/etc/null
-
 cd $(dirname $0)
 
 sudo apt update
@@ -89,6 +85,16 @@ sudo bash -c 'echo "Package: firefox*
 Pin: release o=LP-PPA-mozillateam
 Pin-Priority: 501" >> /etc/apt/preferences.d/mozillateamppa'
 
+echo -e "\n\n\n SYSTEM FULLY UPDATED... Wait 3 seconds"
+sleep 1
+echo "3"
+sleep 1
+echo "2"
+sleep 1
+echo "1"
+sleep 1
+clear
+
 
 
 ####################
@@ -97,62 +103,108 @@ Pin-Priority: 501" >> /etc/apt/preferences.d/mozillateamppa'
 #                  #
 ####################
 
-# Install Gnome-Tweaks and Gnome-Shell-Extension
-sudo add-apt-repository universe
-sudo apt install -y gnome-tweaks
-sudo apt install -y gnome-shell-extension-manager 
+echo -e "Do you want to install and apply additional themes? [y/n]"
+while true; do
+    read -r -n 1 response
+    echo  # Moves to a new line after input
+    case $response in 
+        [yY]) response=0; break ;;
+        [nN]) response=1; break ;;
+        *) echo "Invalid input '$response', enter [y/n]" ;;
+    esac
+done
 
-# Set the UUID for the extension you want to install
-EXTENSION_UUID="user-theme@gnome-shell-extensions.gcampax.github.com"
+if [[ $response -eq 1 ]]; then 
 
-# Get the GNOME Shell version
-GNOME_VERSION=$(gnome-shell --version | awk '{print $3}')
+    # Install Gnome-Tweaks and Gnome-Shell-Extension
+    sudo add-apt-repository universe
+    sudo apt install -y gnome-tweaks
+    sudo apt install -y gnome-shell-extension-manager 
 
-# Create the extensions directory if it doesn't exist
-mkdir -p ~/.local/share/gnome-shell/extensions
+    # Set the UUID for the extension you want to install
+    EXTENSION_UUID="user-theme@gnome-shell-extensions.gcampax.github.com"
 
-# Get the extension metadata URL
-METADATA_URL="https://extensions.gnome.org/extension-info/?uuid=${EXTENSION_UUID}&shell_version=${GNOME_VERSION}"
+    # Get the GNOME Shell version
+    GNOME_VERSION=$(gnome-shell --version | awk '{print $3}')
 
-# Fetch the extension metadata
-METADATA=$(curl -s "$METADATA_URL")
+    # Create the extensions directory if it doesn't exist
+    mkdir -p ~/.local/share/gnome-shell/extensions
 
-# Extract the download URL from the metadata
-DOWNLOAD_URL=$(echo "$METADATA" | grep -oP '(?<="download_url": ")[^"]+')
+    # Get the extension metadata URL
+    METADATA_URL="https://extensions.gnome.org/extension-info/?uuid=${EXTENSION_UUID}&shell_version=${GNOME_VERSION}"
 
-# Download and extract the extension
-if [ -n "$DOWNLOAD_URL" ]; then
-  EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions-brutte/$EXTENSION_UUID"
-  mkdir -p $EXTENSION_DIR
-  wget -O $EXTENSION_DIR/ext.zip "https://extensions.gnome.org$DOWNLOAD_URL"
-  unzip $EXTENSION_DIR/ext.zip
-  rm $EXTENSION_DIR/ext.zip
-  echo "Extension installed to $EXTENSION_DIR"
-else
-  echo "Failed to retrieve the download URL."
+    # Fetch the extension metadata
+    METADATA=$(curl -s "$METADATA_URL")
+
+    # Extract the download URL from the metadata
+    DOWNLOAD_URL=$(echo "$METADATA" | grep -oP '(?<="download_url": ")[^"]+')
+
+    # Download and extract the extension
+    if [ -n "$DOWNLOAD_URL" ]; then
+    EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions-brutte/$EXTENSION_UUID"
+    mkdir -p $EXTENSION_DIR
+    wget -O $EXTENSION_DIR/ext.zip "https://extensions.gnome.org$DOWNLOAD_URL"
+    unzip $EXTENSION_DIR/ext.zip
+    rm $EXTENSION_DIR/ext.zip
+    echo "Extension installed to $EXTENSION_DIR"
+    else
+    echo "Failed to retrieve the download URL."
+    fi
+
+    # Restart GNOME Shell (this may log you out, use with caution)
+    gnome-shell --replace &
+
+    # Copy the themes into the system's folders
+    sudo cp -r icons/* /usr/share/icons
+    sudo cp -r themes/* /usr/share/themes
+
+    # Apply themes
+    dconf write /org/gnome/desktop/interface/cursor-theme "'Qogir-cursors'"
+    dconf write /org/gnome/desktop/interface/icon-theme "'Kora'"
+    dconf write /org/gnome/desktop/interface/gtk-theme "'Tokyo'"
+    dconf write /org/gnome/shell/extensions/user-theme/name "'Sweet-Dark'"
+
+    echo -e "Pick a number between 1 and 10 to select the wallpaper (their location is Ubuntu/Wallpapers). Enter 0 to keep the Ubuntu default one."
+
+    while true; do
+        read -r -n 1 response
+        echo  # Moves to a new line after input
+
+        if [[ "$response" =~ ^[0-9]+$ ]]; then  # Check if input is a number
+            if [ "$response" -eq 0 ]; then 
+                break
+            elif [ "$response" -ge 1 ] && [ "$response" -le 10 ]; then
+                DIR="$(pwd)/Wallpapers"
+                PIC=$(find "$DIR" -maxdepth 1 -type f -name "wallpaper_$response.*" | head -n 1)
+                
+                if [ -f "$PIC" ]; then
+                    gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
+                    break
+                else
+                    echo "Wallpaper $response does not exist."
+                fi
+            else 
+                echo "$response is an invalid input"
+            fi
+        else
+            echo "$response is an invalid input"
+        fi
+    done
+
+    echo -e "\n\n\n THEMES APPLIED, RESTART THE SYSTEM TO COMPLETE ALL THE CHANGES (themes could seem not applied correctly until the system is restarted)... Wait 5 seconds"
+    sleep 1
+    echo "5"
+    sleep 1
+    echo "4"
+    sleep 1
+    echo "3"
+    sleep 1
+    echo "2"
+    sleep 1
+    echo "1"
+    sleep 1
+    clear
 fi
-
-# Restart GNOME Shell (this may log you out, use with caution)
-gnome-shell --replace &
-
-# # Wait that all the manual steps are completed
-# echo "Hi! Now you have to complete the manual steps specified in the README.md file. Don't worry, it takes up to 2 minutes."
-# echo "Please press ANY key to contiue..."
-# read -n 1
-
-# Copy the themes into the system's folders
-sudo cp -r icons/* /usr/share/icons
-sudo cp -r themes/* /usr/share/themes
-
-# Apply themes
-dconf write /org/gnome/desktop/interface/cursor-theme "'Qogir-cursors'"
-dconf write /org/gnome/desktop/interface/icon-theme "'Kora'"
-dconf write /org/gnome/desktop/interface/gtk-theme "'Tokyo'"
-dconf write /org/gnome/shell/extensions/user-theme/name "'Sweet-Dark'"
-
-DIR="$(pwd)/wallpapers"
-PIC=$(ls $DIR/wallpaper_1.png | shuf -n1)
-gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
 
 
 
@@ -236,8 +288,21 @@ rm -rf tmp_deb_files
 #                      #
 ########################
 
-sudo bash -c 'echo "########################\n#                      #\n#   Dotfiles Aliases   #\n#                      #\n########################\n\n" >> ~/.bashrc'
+echo -e "Do you want to create additional aliases in the .bashrc configuration? [y/n]"
+while true; do
+    read -r -n 1 response
+    echo  # Moves to a new line after input
+    case $response in 
+        [yY]) response=0; break ;;
+        [nN]) response=1; break ;;
+        *) echo "Invalid input '$response', enter [y/n]" ;;
+    esac
+done
 
-sudo echo "alias c='clear'" >> ~/.bashrc
-sudo echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
-sudo echo "alias up='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean -y; sudo apt-get autoremove -y;'" >> ~/.bashrc
+if [[ $response -eq 1 ]]; then 
+    sudo bash -c 'echo "########################\n#                      #\n#   Dotfiles Aliases   #\n#                      #\n########################\n\n" >> ~/.bashrc'
+
+    sudo echo "alias c='clear'" >> ~/.bashrc
+    sudo echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
+    sudo echo "alias up='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean -y; sudo apt-get autoremove -y;'" >> ~/.bashrc
+fi
