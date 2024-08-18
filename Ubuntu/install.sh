@@ -19,7 +19,7 @@
 cd $(dirname $0)
 
 sudo apt update
-sudo apt upgrade -y
+sudo apt -y upgrade 
 
 echo -e "\n\n\n SYSTEM FULLY UPDATED... Wait 3 seconds"
 sleep 1
@@ -99,8 +99,8 @@ Pin-Priority: 501" >> /etc/apt/preferences.d/mozillateamppa'
 
 # Install Gnome-Tweaks and Gnome-Shell-Extension
 sudo add-apt-repository universe
-sudo apt install gnome-tweaks -y
-sudo apt install gnome-shell-extension-manager -y
+sudo apt install -y gnome-tweaks
+sudo apt install -y gnome-shell-extension-manager 
 
 # Set the UUID for the extension you want to install
 EXTENSION_UUID="user-theme@gnome-shell-extensions.gcampax.github.com"
@@ -200,22 +200,22 @@ for val in ${program_array[@]}; do
         # Install the programs
         case $val in
 
-            "Discord") wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb" ; sudo apt install ./discord.deb -y ;;
+            "Discord") wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb" ; sudo apt install -y ./discord.deb ;;
             
-            "Visual Studio Code") wget -O vscode.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" ; sudo apt install ./vscode.deb -y ;;
+            "Visual Studio Code") wget -O vscode.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" ; sudo apt install -y ./vscode.deb ;;
             
-            "Bitwarden") wget "https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=deb" -O bitwarden.deb ; sudo apt install ./bitwarden.deb -y ;;
+            "Bitwarden") wget "https://vault.bitwarden.com/download/?app=desktop&platform=linux&variant=deb" -O bitwarden.deb ; sudo apt install -y ./bitwarden.deb ;;
             
-            "Docker") sudo apt-get install ca-certificates curl gnupg -y ; sudo install -m 0755 -d /etc/apt/keyrings ; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg ; sudo chmod a+r /etc/apt/keyrings/docker.gpg ; echo \
+            "Docker") sudo apt-get install -y ca-certificates curl gnupg ; sudo install -m 0755 -d /etc/apt/keyrings ; curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg ; sudo chmod a+r /etc/apt/keyrings/docker.gpg ; echo \
                         "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
                         "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-                        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ; sudo apt-get update ; sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y ;;
+                        sudo tee /etc/apt/sources.list.d/docker.list > /dev/null ; sudo apt-get update ; sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin ;;
             
             "Spotify") curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg ; echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list ; sudo apt-get update && sudo apt-get install spotify-client ;;
             
             "Tailscale") curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null ; curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list ; sudo apt-get update ; sudo apt-get install tailscale ;;
             
-            "Latex Compiler") sudo apt install texlive-science texlive-latex-extra texlive-extra-utils latexmk texlive-publishers -y ;;
+            "Latex Compiler") sudo apt install -y texlive-science texlive-latex-extra texlive-extra-utils latexmk texlive-publishers ;;
         esac
 
     fi
