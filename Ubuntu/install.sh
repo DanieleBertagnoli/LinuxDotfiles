@@ -166,7 +166,8 @@ if [[ $response -eq 1 ]]; then
     dconf write /org/gnome/desktop/interface/gtk-theme "'Tokyo'"
     dconf write /org/gnome/shell/extensions/user-theme/name "'Sweet-Dark'"
 
-    echo -e "Pick a number between 1 and 10 to select the wallpaper (their location is Ubuntu/Wallpapers). Enter 0 to keep the Ubuntu default one."
+    sleep 1
+    echo -e "\n\nPick a number between 1 and 10 to select the wallpaper (their location is Ubuntu/Wallpapers). Enter 0 to keep the Ubuntu default one."
 
     while true; do
         read -r -n 1 response
@@ -245,7 +246,6 @@ IFS=$'\n'
 
 # Iterate the string array using for loop
 for val in ${program_array[@]}; do
-    echo $val
     check_for_input $val
     response=$?
     if [ $response -eq 0 ]; then 
