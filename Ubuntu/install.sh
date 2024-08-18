@@ -19,6 +19,15 @@
 sudo apt update
 sudo apt upgrade -y
 
+echo -e "\n\n\n SYSTEM FULLY UPDATED... Wait 3 seconds"
+sleep 1
+echo "3"
+sleep 1
+echo "2"
+sleep 1
+echo "1"
+clear
+
 ###################
 #                 #
 #   Remove snap   #
