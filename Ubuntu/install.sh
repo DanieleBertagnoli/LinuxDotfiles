@@ -16,6 +16,7 @@ cd $(dirname $0)
 
 sudo apt update
 sudo apt -y upgrade 
+sudo apt install -y curl
 
 echo -e "\n\n\n SYSTEM FULLY UPDATED... Wait 3 seconds"
 sleep 1
@@ -109,8 +110,8 @@ while true; do
     read -r -n 1 response
     echo  # Moves to a new line after input
     case $response in 
-        [yY]) response=0; break ;;
-        [nN]) response=1; break ;;
+        [yY]) response=1; break ;;
+        [nN]) response=0; break ;;
         *) echo "Invalid input '$response', enter [y/n]" ;;
     esac
 done
@@ -142,22 +143,22 @@ if [[ $response -eq 1 ]]; then
 
     # Download and extract the extension
     if [ -n "$DOWNLOAD_URL" ]; then
-    EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions-brutte/$EXTENSION_UUID"
-    mkdir -p $EXTENSION_DIR
-    wget -O $EXTENSION_DIR/ext.zip "https://extensions.gnome.org$DOWNLOAD_URL"
-    unzip $EXTENSION_DIR/ext.zip
-    rm $EXTENSION_DIR/ext.zip
-    echo "Extension installed to $EXTENSION_DIR"
+        EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions/$EXTENSION_UUID"
+        mkdir -p $EXTENSION_DIR
+        wget -O $EXTENSION_DIR/ext.zip "https://extensions.gnome.org$DOWNLOAD_URL"
+        unzip $EXTENSION_DIR/ext.zip -d $EXTENSION_DIR
+        rm $EXTENSION_DIR/ext.zip
+        echo "Extension installed to $EXTENSION_DIR"
     else
-    echo "Failed to retrieve the download URL."
+        echo "Failed to retrieve the download URL."
     fi
 
     # Restart GNOME Shell (this may log you out, use with caution)
     gnome-shell --replace &
 
     # Copy the themes into the system's folders
-    sudo cp -r icons/* /usr/share/icons
-    sudo cp -r themes/* /usr/share/themes
+    sudo cp -r $(pwd)/icons/* /usr/share/icons
+    sudo cp -r $(pwd)/themes/* /usr/share/themes
 
     # Apply themes
     dconf write /org/gnome/desktop/interface/cursor-theme "'Qogir-cursors'"
