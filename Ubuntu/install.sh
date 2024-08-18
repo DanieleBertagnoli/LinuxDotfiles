@@ -16,6 +16,8 @@
 # echo "It's recommended to switch from Wayland to X11 to achieve a better compatibility. Uncomment the option 'WaylandEnable' and set it to 'false'."
 # sudo gedit /etc/gdm3/custom.conf 2&>/etc/null
 
+cd $(dirname $0)
+
 sudo apt update
 sudo apt upgrade -y
 
