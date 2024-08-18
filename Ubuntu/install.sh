@@ -37,13 +37,14 @@ clear
 #                 #
 ###################
 
-echo -e "Do you want remove snap and all its packages? [y/n]\nWARNING: This option is recommended only to expert users."
+echo -e "Do you want to remove snap and all its packages? [y/n]\nWARNING: This option is recommended only to expert users."
 while true; do
-    read -n 1 response
+    read -r -n 1 response
+    echo  # Moves to a new line after input
     case $response in 
-        [yY]) response=0 ;;
-        [nN]) response=1 ;;
-        *) echo "Invalid input $response, enter [y/n]" ;;
+        [yY]) response=0; break ;;
+        [nN]) response=1; break ;;
+        *) echo "Invalid input '$response', enter [y/n]" ;;
     esac
 done
 
