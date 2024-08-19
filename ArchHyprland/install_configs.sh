@@ -17,6 +17,9 @@ cp CustomConf/hook.sh ~/dotfiles-versions/
 # Copy custom post.sh for the post installation
 cp CustomConf/post.sh ~/dotfiles-versions/
 
+# Copy wallpapers
+cp -r Wallpapers $(xdg-user-dir PICTURES)
+
 # Function to prompt for installation
 prompt_install() {
     local package=$1

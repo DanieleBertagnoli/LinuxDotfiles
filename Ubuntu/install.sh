@@ -143,18 +143,14 @@ if [[ $response -eq 1 ]]; then
 
     # Download and extract the extension
     if [ -n "$DOWNLOAD_URL" ]; then
-        EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions/$EXTENSION_UUID"
-        mkdir -p $EXTENSION_DIR
+        EXTENSION_DIR="$HOME/.local/share/gnome-shell/extensions"
         wget -O $EXTENSION_DIR/ext.zip "https://extensions.gnome.org$DOWNLOAD_URL"
-        unzip $EXTENSION_DIR/ext.zip -d $EXTENSION_DIR
+        gnome-extensions install $EXTENSION_DIR/ext.zip
         rm $EXTENSION_DIR/ext.zip
-        echo "Extension installed to $EXTENSION_DIR"
+        echo "Extension installed"
     else
         echo "Failed to retrieve the download URL."
     fi
-
-    # Restart GNOME Shell (this may log you out, use with caution)
-    gnome-shell --replace &
 
     # Copy the themes into the system's folders
     sudo cp -r $(pwd)/icons/* /usr/share/icons
@@ -165,34 +161,6 @@ if [[ $response -eq 1 ]]; then
     dconf write /org/gnome/desktop/interface/icon-theme "'Kora'"
     dconf write /org/gnome/desktop/interface/gtk-theme "'Tokyo'"
     dconf write /org/gnome/shell/extensions/user-theme/name "'Sweet-Dark'"
-
-    sleep 1
-    echo -e "\n\nPick a number between 1 and 10 to select the wallpaper (their location is Ubuntu/Wallpapers). Enter 0 to keep the Ubuntu default one."
-
-    while true; do
-        read -r response
-        echo  # Moves to a new line after input
-
-        if [[ "$response" =~ ^[0-9]+$ ]]; then  # Check if input is a number
-            if [ "$response" -eq 0 ]; then 
-                break
-            elif [ "$response" -ge 1 ] && [ "$response" -le 10 ]; then
-                DIR="$(pwd)/Wallpapers"
-                PIC=$(find "$DIR" -maxdepth 1 -type f -name "wallpaper_$response.*" | head -n 1)
-                
-                if [ -f "$PIC" ]; then
-                    gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
-                    break
-                else
-                    echo "wallpaper_$response does not exist."
-                fi
-            else 
-                echo "$response is an invalid input"
-            fi
-        else
-            echo "$response is an invalid input"
-        fi
-    done
 
     echo -e "\n\n\n THEMES APPLIED, RESTART THE SYSTEM TO COMPLETE ALL THE CHANGES (themes could seem not applied correctly until the system is restarted)... Wait 5 seconds"
     sleep 1
@@ -208,6 +176,45 @@ if [[ $response -eq 1 ]]; then
     sleep 1
 fi
 clear
+
+
+
+##################
+#                #
+#   Wallpapers   #
+#                #
+##################
+
+# Copy the wallpapers directory in the system pictures directory
+cp -r $(pwd)/Wallpapers $(xdg-user-dir PICTURES)
+
+echo -e "\n\nPick a number between 1 and 10 to select the wallpaper (their location is Ubuntu/Wallpapers). Enter 0 to keep the Ubuntu default one."
+
+while true; do
+    read -r response
+    echo  # Moves to a new line after input
+
+    if [[ "$response" =~ ^[0-9]+$ ]]; then  # Check if input is a number
+        if [ "$response" -eq 0 ]; then 
+            break
+        elif [ "$response" -ge 1 ] && [ "$response" -le 10 ]; then
+            DIR="$(xdg-user-dir PICTURES)/Wallpapers"
+            PIC=$(find "$DIR" -maxdepth 1 -type f -name "wallpaper_$response.*" | head -n 1)
+            
+            if [ -f "$PIC" ]; then
+                gsettings set org.gnome.desktop.background picture-uri "file://$PIC"
+                break
+            else
+                echo "wallpaper_$response does not exist."
+            fi
+        else 
+            echo "$response is an invalid input"
+        fi
+    else
+        echo "$response is an invalid input"
+    fi
+done
+
 
 
 #######################
@@ -304,10 +311,13 @@ if [[ $response -eq 1 ]]; then
     echo "########################\n#                      #\n#   Dotfiles Aliases   #\n#                      #\n########################\n\n" >> ~/.bashrc
 
     echo "alias c='clear'" >> ~/.bashrc
-    echo "alias dw='cd ~/Downloads'" >> ~/.bashrc
+    download_dir=$(xdg-user-dir DOWNLOAD)
+    echo "alias dw='cd $download_dir'" >> ~/.bashrc
     echo "alias up='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoclean -y; sudo apt-get autoremove -y;'" >> ~/.bashrc
     source ~/.bashrc
 fi
 clear
 
-echo "Dotfiles successfully installed, we suggest to reboot the system. Bye ;)".
+echo -e "\nIf you installed the additional themes, please restart the system and then run the following command:\n\ndconf write /org/gnome/shell/extensions/user-theme/name \"'Sweet-Dark'\""
+echo -e "\nThis will apply the theme also to the shell for a better appearance. If you want to load more themes or just change them, just follow the README file provided in the repo."
+echo -e "\n\nDotfiles successfully installed, we suggest to reboot the system."
