@@ -26,7 +26,7 @@ function install_from_pacman() {
 function install_from_aur() {
     pkgs=("$@")
     for pkg in "${pkgs[@]}"; do
-        sudo yay -S --noconfirm $pkg
+        yay -S --noconfirm $pkg
     done
 }
 
