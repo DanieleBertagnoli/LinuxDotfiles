@@ -9,7 +9,9 @@ cp CustomConf/my_monitors.conf ~/.config/hypr/conf/monitors/
 cp CustomConf/custom.conf ~/.config/hypr/conf/
 
 # Copy custom .bashrc
-cp CustomConf/.bashrc ~/
+# cp CustomConf/.bashrc ~/
+cp CustomConf/custom-bashrc ~/.config/bashrc
+cp CustomConf/10-aliases ~/.config/bashrc
 
 # Copy custom hook.sh for protecting files
 cp CustomConf/hook.sh ~/.ml4w-hyprland
@@ -17,8 +19,14 @@ cp CustomConf/hook.sh ~/.ml4w-hyprland
 # Copy custom post.sh for the post installation
 cp CustomConf/post.sh ~/.ml4w-hyprland
 
+# Copy alacritty configs
+cp CustomConf/alacritty.toml ~/.configs/alacritty
+
 # Copy wallpapers
 cp -r Wallpapers $(xdg-user-dir PICTURES)
+
+# Replace the line in wallpaper.sh
+# sed -i 's/wal -q -i $used_wallpaper/wal -q -i $used_wallpaper --saturate 0.8/' ~/.config/hypr/scripts/wallpaper.sh
 
 # Function to prompt for installation
 prompt_install() {

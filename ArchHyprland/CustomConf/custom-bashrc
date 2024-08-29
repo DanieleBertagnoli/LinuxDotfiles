@@ -1,0 +1,3 @@
+eval $(gnome-keyring-daemon --start)
+
+alias autoclean='sudo pacman -Rcns $(pacman -Qdtq)'
