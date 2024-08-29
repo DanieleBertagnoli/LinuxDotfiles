@@ -12,10 +12,10 @@ cp CustomConf/custom.conf ~/.config/hypr/conf/
 cp CustomConf/.bashrc ~/
 
 # Copy custom hook.sh for protecting files
-cp CustomConf/hook.sh ~/dotfiles-versions/
+cp CustomConf/hook.sh ~/.ml4w-hyprland
 
 # Copy custom post.sh for the post installation
-cp CustomConf/post.sh ~/dotfiles-versions/
+cp CustomConf/post.sh ~/.ml4w-hyprland
 
 # Copy wallpapers
 cp -r Wallpapers $(xdg-user-dir PICTURES)
@@ -53,15 +53,19 @@ prompt_remove() {
 
 # Install packages with prompt
 prompt_install gnome-keyring "GNOME Os Keyring" pacman
+#!/bin/bash
+
+if command -v gnome-keyring-daemon >/dev/null 2>&1; then
+    gnome-keyring-daemon -r -d
+fi
+
+
 prompt_install spotify-launcher Spotify pacman
 prompt_install vescord "Vesktop (Discord Wayland Porting)" yay
 
 # Remove packages with prompt
-prompt_remove starship Starship
-prompt_remove neovim Neovim
-
-# Replace the line in wallpaper.sh
-# sed -i 's/wal -q -i $used_wallpaper/wal -q -i $used_wallpaper --saturate 0.8/' ~/.config/hypr/scripts/wallpaper.sh
+# prompt_remove starship Starship
+# prompt_remove neovim Neovim
 
 # Install packages for enabling screen-sharing
 sudo pacman -S --noconfirm pipewire wireplumber 

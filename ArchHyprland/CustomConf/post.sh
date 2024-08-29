@@ -12,7 +12,7 @@ echo ":: Running hook for ML4W Dotfiles $version"
 sudo pacman -S gnome-keyring
 
 # Remove installed packages
-sudo pacman -R starship
-sudo pacman -R neovim
-sudo rm -rf ~/.config/starship* ~/.config/nvim*
+# sudo pacman -R starship
+# sudo pacman -R neovim
+# sudo rm -rf ~/.config/starship* ~/.config/nvim*
 
