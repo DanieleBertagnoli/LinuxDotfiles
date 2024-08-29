@@ -22,6 +22,9 @@ cp CustomConf/post.sh ~/.ml4w-hyprland
 # Copy alacritty configs
 cp CustomConf/alacritty.toml ~/.configs/alacritty
 
+# Copy starship configs
+cp CustomConf/starship.toml ~/.config/
+
 # Copy wallpapers
 cp -r Wallpapers $(xdg-user-dir PICTURES)
 

@@ -8,6 +8,7 @@
 alias c='clear'
 alias ls='eza -a --icons'
 alias ll='eza -al --icons'
+alias l='eza --icons'
 alias lt='eza -a --tree --level=1 --icons'
 alias shutdown='systemctl poweroff'
 alias ts='~/.config/ml4w/scripts/snapshot.sh'
