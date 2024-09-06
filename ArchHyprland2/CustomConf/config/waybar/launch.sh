@@ -4,8 +4,8 @@ killall waybar
 pkill waybar
 sleep 0.5
 
-config_file="$HOME/.config/waybar/themes/ml4w-blur/config"
-style_file="$HOME/.config/waybar/themes/ml4w-blur/white/style.css"
+config_file="$HOME/.config/waybar/themes/white-blur/config"
+style_file="$HOME/.config/waybar/themes/white-blur/style.css"
 
 cat $config_file
 

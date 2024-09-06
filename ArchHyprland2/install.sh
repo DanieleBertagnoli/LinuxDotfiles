@@ -24,4 +24,5 @@ if [ ! -d /etc/sddm.conf.d/ ]; then
 fi
 
 sudo cp $HOME/.config/sddm/sddm.conf /etc/sddm.conf.d/
+# TODO download of sugar-candy
 # sudo cp $HOME/.config/sddm/theme.conf /usr/share/sddm/themes/sugar-candy/

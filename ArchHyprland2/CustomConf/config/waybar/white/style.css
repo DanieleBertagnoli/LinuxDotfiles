@@ -12,13 +12,9 @@
 @define-color textcolor2 #000000;
 @define-color textcolor3 #000000;
 @define-color iconcolor #FFFFFF;
-
-@import '../../ml4w-blur/style.css';
-
-window#waybar {
-    background-color: rgba(255,255,255,0.1);
-}
-
+ 
+@import './main-style.css';
+ 
 #custom-ml4w-welcome {
     background-image: url("../../assets/ml4w-icon-white.svg");
 }
