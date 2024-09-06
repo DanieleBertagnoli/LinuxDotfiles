@@ -76,6 +76,7 @@ pacman_packages=(
     gtk4
     nwg-look
     dunst
+    fastfetch
 )
 
 # Packages to be installed using yay
@@ -90,13 +91,13 @@ yay_packages=(
     grub-btrfs
 )
 
-for package in "${pacman_packages[@]}"; do
-    install $package "pacman"
-done
+#for package in "${pacman_packages[@]}"; do
+#    install $package "pacman"
+#done
 
-for package in "${yay_packages[@]}"; do
-    install $package "yay"
-done
+#for package in "${yay_packages[@]}"; do
+#    install $package "yay"
+#done
 
 clear
 

@@ -38,9 +38,17 @@ wallpaper=$1
 wal -q -i $wallpaper
 source ~/.cache/wal/colors.sh
 
+# Restart hyprpaper
+killall -e hyprpaper & 
+sleep 1; 
+wal_tpl=$(cat ~/.config/hypr/hyprpaper.tpl)
+output=${wal_tpl//WALLPAPER/$wallpaper}
+echo "$output" > ~/.config/hypr/hyprpaper.conf
+hyprpaper & > /dev/null 2>&1
+
 # Reload ags
-killall ags
-ags &
+# killall ags
+# ags &
 
 # Create the blurred version of the wallpaper (used in wlogout)
 magick $wallpaper -resize 75% $blurred_wallpaper
