@@ -1,0 +1,28 @@
+# By: Daniele Bertagnoli
+
+#           _               _____ _____  _____ _______ _________     __
+#     /\   | |        /\   / ____|  __ \|_   _|__   __|__   __\ \   / /
+#    /  \  | |       /  \ | |    | |__) | | |    | |     | |   \ \_/ / 
+#   / /\ \ | |      / /\ \| |    |  _  /  | |    | |     | |    \   /  
+#  / ____ \| |____ / ____ \ |____| | \ \ _| |_   | |     | |     | |   
+# /_/    \_\______/_/    \_\_____|_|  \_\_____|  |_|     |_|     |_|   
+#
+
+# Alacritty configuration file
+
+[font]
+size = 12
+
+[font.normal]
+family = "DejaVu Sans Mono"
+style = "Regular"
+
+[window]
+opacity = 0.7
+
+[window.padding]
+x = 15
+y = 15
+
+[selection]
+save_to_clipboard = true

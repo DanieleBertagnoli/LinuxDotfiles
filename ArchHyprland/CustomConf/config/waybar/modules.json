@@ -1,0 +1,290 @@
+// By: Stephan Raabe
+
+// __          __ __     ______          _____    __  __  ____  _____  _    _ _      ______  _____ 
+// \ \        / /\\ \   / /  _ \   /\   |  __ \  |  \/  |/ __ \|  __ \| |  | | |    |  ____|/ ____|
+//  \ \  /\  / /  \\ \_/ /| |_) | /  \  | |__) | | \  / | |  | | |  | | |  | | |    | |__  | (___  
+//   \ \/  \/ / /\ \\   / |  _ < / /\ \ |  _  /  | |\/| | |  | | |  | | |  | | |    |  __|  \___ \ 
+//    \  /\  / ____ \| |  | |_) / ____ \| | \ \  | |  | | |__| | |__| | |__| | |____| |____ ____) |
+//     \/  \/_/    \_\_|  |____/_/    \_\_|  \_\ |_|  |_|\____/|_____/ \____/|______|______|_____/ 
+// 
+
+// This file contains all the modules that will be loaded in the config file
+
+{
+  // Workspaces
+  "hyprland/workspaces": {
+    "on-scroll-up": "hyprctl dispatch workspace r-1",
+    "on-scroll-down": "hyprctl dispatch workspace r+1",
+    "on-click": "activate",
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{}",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
+    },
+    "persistent-workspaces": {
+            "*": 5
+    }
+  },
+
+  // Taskbar
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": ["Alacritty", "kitty"],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
+    },
+    "rewrite": {
+      "Firefox Web Browser": "Firefox",
+      "Foot Server": "Terminal"
+    }
+  },
+
+  // Hyprland Window
+  "hyprland/window": {
+    "rewrite": {
+      "(.*) - Brave": "$1",
+      "(.*) - Chromium": "$1",
+      "(.*) - Brave Search": "$1",
+      "(.*) - Outlook": "$1",
+      "(.*) Microsoft Teams": "$1"
+    },
+    "separate-outputs": true
+  },
+
+  // Empty
+  "custom/empty": {
+    "format": ""
+  },
+
+  // Updates Count
+  "custom/updates": {
+    "format": "  {}",
+    "escape": true,
+    "return-type": "json",
+    "exec": "~/.config/dotfiles/scripts/updates.sh",
+    "restart-interval": 60,
+    "on-click": "alacritty --class dotfiles-floating -e ~/.config/dotfiles/scripts/install_updates.sh"
+  },
+
+  // Wallpaper
+  "custom/wallpaper": {
+    "format": "",
+    "on-click": "waypaper",
+    "tooltip-format": "Select a wallpaper"
+  },
+
+  // Waybar Themes
+  "custom/waybarthemes": {
+    "format": "",
+    "on-click": "~/.config/waybar/themeswitcher.sh",
+    "tooltip-format": "Select a waybar theme"
+  },
+
+  // Rofi Application Launcher
+  "custom/appmenu": {
+    // START APPS LABEL
+    "format": "Apps",
+    // END APPS LABEL
+    "on-click": "rofi -show drun -replace",
+    "tooltip-format": "Open the application launcher"
+  },
+
+  // Rofi Application Launcher
+  "custom/appmenuicon": {
+    "format": "",
+    "on-click": "rofi -show drun -replace",
+    "tooltip-format": "Open the application launcher"
+  },
+
+  // Power Menu
+  "custom/exit": {
+    "format": "",
+    "on-click": "wlogout",
+    "tooltip-format": "Power Menu"
+  },
+
+  // System tray
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+
+  // Clock
+  "clock": {
+    "format": "{:%H:%M %a}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+
+  // CPU
+  "cpu": {
+    "format": " CPU {usage}% ",
+    "on-click": "alacritty --class dotfiles-floating -e htop"
+  },
+
+  // Memory
+  "memory": {
+    "format": " Mem {}%",
+    "on-click": "alacritty --class dotfiles-floating -e htop"
+  },
+
+  // Harddisc space used
+  "disk": {
+    "interval": 10,
+    "format": "Disk {percentage_used}% ",
+    "path": "/",
+    "on-click": "alacritty --class dotfiles-floating -e htop"
+  },
+
+  // Group Hardware
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": ["disk", "cpu", "memory"]
+  },
+
+  // Group Links
+  "group/links": {
+    "orientation": "horizontal",
+    "modules": [ "custom/empty" ]
+  },
+
+  // Group Settings
+  "group/settings": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "not-memory",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/settings",
+      "custom/waybarthemes",
+      "custom/wallpaper"
+    ]
+  },
+
+  // Network
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "   {signalStrength}%",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "Disconnected",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "alacritty --class dotfiles-floating -e nmtui"
+  },
+
+  // Battery
+  "battery": {
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-alt": "{icon}  {time}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": [" ", " ", " ", " ", " "]
+  },
+
+  // Pulseaudio
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": " ",
+      "hands-free": " ",
+      "headset": " ",
+      "phone": " ",
+      "portable": " ",
+      "car": " ",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  // Bluetooth
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": "",
+    "format-off": "",
+    "interval": 30,
+    "on-click": "blueman-manager",
+    "format-no-controller": ""
+  },
+
+  // Other
+  "user": {
+    "format": "{user}",
+    "interval": 60,
+    "icon": false
+  },
+
+  // backlight:
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "scroll-step": 1
+  },
+
+  // QUICK LINKS TODO
+
+  "custom/chromium": {
+    "format": "",
+    "on-click": "chromium",
+    "tooltip-format": "Open Chromium"
+  }, 
+  "custom/firefox": {
+    "format": "",
+    "on-click": "firefox",
+    "tooltip-format": "Open Firefox"
+  },
+  "custom/nautilus": {
+    "format": "",
+    "on-click": "nautilus",
+    "tooltip-format": "Open filemanager"
+  },
+  "custom/quicklinkempty": {
+  }, 
+  "group/quicklinks": {
+    "orientation": "horizontal",
+    "modules": [
+        "custom/firefox",
+        "custom/nautilus"
+    ]
+  }
+}
