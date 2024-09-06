@@ -4,7 +4,9 @@ killall waybar
 pkill waybar
 sleep 0.5
 
-config_file='~/.config/waybar/config'
-style_file='~/.config/waybar/style.css'
+config_file="$HOME/.config/waybar/themes/ml4w-blur/config"
+style_file="$HOME/.config/waybar/themes/ml4w-blur/white/style.css"
+
+cat $config_file
 
 waybar -c $config_file -s $style_file &
