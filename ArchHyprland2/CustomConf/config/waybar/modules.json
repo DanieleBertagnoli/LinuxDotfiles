@@ -53,32 +53,9 @@
     "separate-outputs": true
   },
 
-  // ML4W Welcome App
-  "custom/ml4w-welcome": {
-    "on-click": "ags -t sidebar",
-    "on-click-right": "sleep 0.1 && ~/.config/ml4w/apps/ML4W_Welcome-x86_64.AppImage",
-    "format": " ",
-    "tooltip-format": "Open Sidebar"
-  },
-
   // Empty
   "custom/empty": {
     "format": ""
-  },
-
-  // Empty
-  "custom/tools": {
-    "format": "",
-    "tooltip-format": "Tools"
-  },
-
-  // Cliphist
-  "custom/cliphist": {
-    "format": "",
-    "on-click": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh",
-    "on-click-right": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh d",
-    "on-click-middle": "sleep 0.1 && ~/.config/ml4w/scripts/cliphist.sh w",
-    "tooltip-format": "Clipboard Manager"
   },
 
   // Updates Count
@@ -96,8 +73,7 @@
   "custom/wallpaper": {
     "format": "",
     "on-click": "waypaper",
-    "on-click-right": "~/.config/hypr/scripts/wallpaper-effects.sh",
-    "tooltip-format": "Left: Select a wallpaper\nRight: Select wallpaper effect"
+    "tooltip-format": "Select a wallpaper"
   },
 
   // Waybar Themes
@@ -107,57 +83,20 @@
     "tooltip-format": "Select a waybar theme"
   },
 
-  // Settings
-  "custom/settings": {
-    "format": "",
-    "on-click": "~/.config/ml4w/apps/ML4W_Dotfiles_Settings-x86_64.AppImage",
-    "tooltip-format": "ML4W Dotfiles Settings"
-  },
-
-  // Keybindings
-  "custom/keybindings": {
-    "format": "",
-    "on-click": "~/.config/hypr/scripts/keybindings.sh",
-    "tooltip": false
-  },
-
-  // ChatGPT Launcher
-  "custom/chatgpt": {
-    "format": " ",
-    "on-click": "~/.config/ml4w/settings/ai.sh",
-    "tooltip-format": "AI Support"
-  },
-
-  // Calculator
-  "custom/calculator": {
-    "format": "",
-    "on-click": "qalculate-gtk",
-    "tooltip-format": "Open calculator"
-  },
-
-  // Windows VM
-  "custom/windowsvm": {
-    "format": "",
-    "on-click": "~/.config/ml4w/scripts/launchvm.sh",
-    "tooltip": false
-  },
-
   // Rofi Application Launcher
   "custom/appmenu": {
     // START APPS LABEL
     "format": "Apps",
     // END APPS LABEL
-    "on-click": "sleep 0.2;rofi -show drun -replace",
-    "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
-    "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
+    "on-click": "rofi -show drun -replace",
+    "tooltip-format": "Open the application launcher"
   },
 
   // Rofi Application Launcher
   "custom/appmenuicon": {
     "format": "",
     "on-click": "rofi -show drun -replace",
-    "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
-    "tooltip-format": "Left: Open the application launcher\nRight: Show all keybindings"
+    "tooltip-format": "Open the application launcher"
   },
 
   // Power Menu
@@ -165,37 +104,6 @@
     "format": "",
     "on-click": "wlogout",
     "tooltip-format": "Power Menu"
-  },
-
-  // Hyprshade
-  "custom/hyprshade": {
-    "format": "",
-    "tooltip-format": "Toggle Screen Shader",
-    "on-click": "sleep 0.5; ~/.config/hypr/scripts/hyprshade.sh",
-    "on-click-right": "sleep 0.5; ~/.config/hypr/scripts/hyprshade.sh rofi"
-  },
-
-  // Hypridle inhibitor
-  "custom/hypridle": {
-    "format": "",
-    "return-type": "json",
-    "escape": true,
-    "exec-on-event": true,
-    "interval": 60,
-    "exec": "~/.config/hypr/scripts/hypridle.sh status",
-    "on-click": "~/.config/hypr/scripts/hypridle.sh toggle",
-    "on-click-right": "hyprlock"
-  },
-
-  // Keyboard State
-  "keyboard-state": {
-    "numlock": true,
-    "capslock": true,
-    "format": "{name} {icon}",
-    "format-icons": {
-      "locked": "",
-      "unlocked": ""
-    }
   },
 
   // System tray
@@ -207,52 +115,34 @@
   // Clock
   "clock": {
     "format": "{:%H:%M %a}",
-    // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    // START CLOCK FORMAT
     "format-alt": "{:%Y-%m-%d}"
-    // END CLOCK FORMAT
-  },
-
-  // System
-  "custom/system": {
-    "format": "",
-    "tooltip": false
   },
 
   // CPU
   "cpu": {
-    "format": "/ C {usage}% ",
+    "format": "/ CPU {usage}% ",
     "on-click": "~/.config/ml4w/settings/systeminfo.sh"
   },
 
   // Memory
   "memory": {
-    "format": "/ M {}% ",
+    "format": "/ Mem {}% ",
     "on-click": "~/.config/ml4w/settings/systeminfo.sh"
   },
 
   // Harddisc space used
   "disk": {
-    "interval": 30,
-    "format": "D {percentage_used}% ",
+    "interval": 10,
+    "format": "Disk {percentage_used}% ",
     "path": "/",
     "on-click": "~/.config/ml4w/settings/systeminfo.sh"
   },
 
-  "hyprland/language": {
-    "format": "/ K {short}"
-  },
-
   // Group Hardware
   "group/hardware": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-      "children-class": "not-memory",
-      "transition-left-to-right": false
-    },
-    "modules": ["custom/system", "disk", "cpu", "memory", "hyprland/language"]
+    "orientation": "horizontal",
+    "modules": ["disk", "cpu", "memory"]
   },
 
   // Group Tools
@@ -306,8 +196,7 @@
     "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
-    "on-click": "$(cat ~/.config/ml4w/settings/terminal.sh) --class dotfiles-floating -e nmtui",
-    "on-click-right": "~/.config/ml4w/settings/networkmanager.sh"
+    "on-click": "alacritty --class dotfiles-floating -e nmtui"
   },
 
   // Battery
@@ -385,5 +274,35 @@
       ""
     ],
     "scroll-step": 1
+  }
+}
+
+
+
+// QUICK LINKS TODO
+{
+  "custom/chromium": {
+      "format": "",
+      "on-click": "chromium",
+      "tooltip-format": "Open Chromium"
+  }, 
+  "custom/firefox": {
+      "format": "",
+      "on-click": "firefox",
+      "tooltip-format": "Open Firefox"
+  },
+  "custom/nautilus": {
+      "format": "",
+      "on-click": "nautilus",
+      "tooltip-format": "Open filemanager"
+  },
+  "custom/quicklinkempty": {
+  }, 
+  "group/quicklinks": {
+      "orientation": "horizontal",
+      "modules": [
+          "custom/firefox",
+          "custom/nautilus"
+      ]
   }
 }

@@ -16,6 +16,11 @@
 # ----------------------------------------------------- 
 
 blurred_wallpaper="$HOME/.config/dotfiles/cache/blurred_wallpaper.png"
+
+if [ ! -d "$HOME/.config/dotfiles/cache" ]; then
+    mkdir -p "$HOME/.config/dotfiles/cache"
+fi
+
 rasi_file="$HOME/.cache/wal/current_wallpaper.rasi"
 blur="50x30"
 
