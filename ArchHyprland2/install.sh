@@ -6,7 +6,7 @@ sudo pacman -Syu
 
 sudo pacman -S hyprland alacritty nautilus waybar hyprpaper starship rofi-wayland python-pywal hyprlock
 
-sudo pacman -S eza ttf-nerd-fonts-symbols gnome-keyring breeze gtk4 nwg-look
+sudo pacman -S eza ttf-nerd-fonts-symbols gnome-keyring breeze gtk4 nwg-look dunst
 
 yay -S wlogout ags bibata-cursor-theme waypaper figlet gum timeshift trizen
 

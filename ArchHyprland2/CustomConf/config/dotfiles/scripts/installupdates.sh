@@ -63,7 +63,7 @@ $aur_helper
 if [[ $(_isInstalledAUR "flatpak") == "0" ]] ;then
     flatpak upgrade
 fi
-
+yay
 notify-send "Update complete"
 echo 
 echo ":: Update complete"
