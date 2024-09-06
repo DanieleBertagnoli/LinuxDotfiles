@@ -47,8 +47,6 @@
         "battery", 
         "network",
         "group/hardware",
-        "group/tools",
-        "tray",
         "custom/exit",
         "clock"
     ]

@@ -8,7 +8,7 @@ sudo pacman -S hyprland alacritty nautilus waybar hyprpaper starship rofi-waylan
 
 sudo pacman -S eza ttf-nerd-fonts-symbols gnome-keyring breeze gtk4 nwg-look
 
-yay -S wlogout ags bibata-cursor-theme waypaper
+yay -S wlogout ags bibata-cursor-theme waypaper figlet gum timeshift trizen
 
 cp -r ./CustomConf/config/* ~/.config
 cp ./CustomConf/.bashrc ~/.bashrc

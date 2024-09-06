@@ -218,26 +218,6 @@ window#waybar.empty #window {
     color: #dc2f2f;
 }
 
-#custom-ml4w-welcome {
-    margin-right: 12px;
-    background-image: url("../assets/ml4w-icon.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain; 
-    padding-right: 20px;
-    opacity: 0.8;
-}
-
-#custom-chatgpt {
-    margin-right: 12px;
-    background-image: url("../assets/openai.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain; 
-    padding-right: 16px;
-    opacity: 0.8;
-}
-
 /* -----------------------------------------------------
  * Idle Inhibator
  * ----------------------------------------------------- */
@@ -278,7 +258,7 @@ window#waybar.empty #window {
  * ----------------------------------------------------- */
 
 #custom-exit {
-    margin: 0px 13px 0px 0px;
+    margin: 0px 13px 0px 13px;
     padding:0px;
     font-size:20px;
     color: @iconcolor;
@@ -317,15 +297,11 @@ window#waybar.empty #window {
  * Hardware Group
  * ----------------------------------------------------- */
 
- #disk,#memory,#cpu,#language {
+ #disk,#memory,#cpu {
     margin:0px;
     padding:0px;
     font-size:16px;
     color:@iconcolor;
-}
-
-#language {
-    margin-right:10px;
 }
 
 /* -----------------------------------------------------
@@ -454,21 +430,4 @@ window#waybar.empty #window {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-}
-
-/* -----------------------------------------------------
- * Tray
- * ----------------------------------------------------- */
-
-#tray {
-    padding: 0px 15px 0px 0px;
-    color: @textcolor3;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
 }

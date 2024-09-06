@@ -63,10 +63,9 @@
     "format": "  {}",
     "escape": true,
     "return-type": "json",
-    "exec": "~/.config/ml4w/scripts/updates.sh",
+    "exec": "~/.config/dotfiles/scripts/updates.sh",
     "restart-interval": 60,
-    "on-click": "$(cat ~/.config/ml4w/settings/terminal.sh) --class dotfiles-floating -e ~/.config/ml4w/scripts/installupdates.sh",
-    "on-click-right": "~/.config/ml4w/settings/software.sh"
+    "on-click": "alacritty --class dotfiles-floating -e ~/.config/dotfiles/scripts/installupdates.sh"
   },
 
   // Wallpaper
@@ -121,14 +120,14 @@
 
   // CPU
   "cpu": {
-    "format": "/ CPU {usage}% ",
-    "on-click": "~/.config/ml4w/settings/systeminfo.sh"
+    "format": " CPU {usage}% ",
+    "on-click": "alacritty --class dotfiles-floating -e htop"
   },
 
   // Memory
   "memory": {
-    "format": "/ Mem {}% ",
-    "on-click": "~/.config/ml4w/settings/systeminfo.sh"
+    "format": " Mem {}%",
+    "on-click": "alacritty --class dotfiles-floating -e htop"
   },
 
   // Harddisc space used
@@ -136,7 +135,7 @@
     "interval": 10,
     "format": "Disk {percentage_used}% ",
     "path": "/",
-    "on-click": "~/.config/ml4w/settings/systeminfo.sh"
+    "on-click": "alacritty --class dotfiles-floating -e htop"
   },
 
   // Group Hardware
@@ -145,29 +144,10 @@
     "modules": ["disk", "cpu", "memory"]
   },
 
-  // Group Tools
-  "group/tools": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-      "children-class": "not-memory",
-      "transition-left-to-right": false
-    },
-    "modules": [
-      "custom/tools",
-      "custom/cliphist",
-      "custom/hypridle",
-      "custom/hyprshade"
-    ]
-  },
-
   // Group Links
   "group/links": {
     "orientation": "horizontal",
-    "modules": [
-            //"custom/chatgpt",
-      "custom/empty"      
-    ]
+    "modules": [ "custom/empty" ]
   },
 
   // Group Settings
