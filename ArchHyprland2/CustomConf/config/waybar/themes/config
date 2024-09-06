@@ -11,7 +11,7 @@
 {
     // General Settings
     "layer": "top",
-    "margin-top": 14,
+    "margin-top": 0,
     "margin-bottom": 0,
     "layer": "top",
     "margin-left": 0,
@@ -25,8 +25,9 @@
 
     // Modules Left
     "modules-left": [
-        "custom/appmenu"
+        "custom/appmenu",
         "group/settings",
+        "custom/wallpaper",
         "group/quicklinks",
         "hyprland/window",
         "custom/empty"

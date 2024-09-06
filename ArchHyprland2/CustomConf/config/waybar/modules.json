@@ -274,35 +274,32 @@
       ""
     ],
     "scroll-step": 1
-  }
-}
+  },
 
+  // QUICK LINKS TODO
 
-
-// QUICK LINKS TODO
-{
   "custom/chromium": {
-      "format": "",
-      "on-click": "chromium",
-      "tooltip-format": "Open Chromium"
+    "format": "",
+    "on-click": "chromium",
+    "tooltip-format": "Open Chromium"
   }, 
   "custom/firefox": {
-      "format": "",
-      "on-click": "firefox",
-      "tooltip-format": "Open Firefox"
+    "format": "",
+    "on-click": "firefox",
+    "tooltip-format": "Open Firefox"
   },
   "custom/nautilus": {
-      "format": "",
-      "on-click": "nautilus",
-      "tooltip-format": "Open filemanager"
+    "format": "",
+    "on-click": "nautilus",
+    "tooltip-format": "Open filemanager"
   },
   "custom/quicklinkempty": {
   }, 
   "group/quicklinks": {
-      "orientation": "horizontal",
-      "modules": [
-          "custom/firefox",
-          "custom/nautilus"
-      ]
+    "orientation": "horizontal",
+    "modules": [
+        "custom/firefox",
+        "custom/nautilus"
+    ]
   }
 }
