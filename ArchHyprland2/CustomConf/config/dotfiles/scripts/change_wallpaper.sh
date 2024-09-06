@@ -15,7 +15,7 @@
 # Set defaults
 # ----------------------------------------------------- 
 
-blurred_wallpaper="$HOME/.config/wlogout/blurred_wallpaper.png"
+blurred_wallpaper="$HOME/.config/dotfiles/cache/blurred_wallpaper.png"
 rasi_file="$HOME/.cache/wal/current_wallpaper.rasi"
 blur="50x30"
 
