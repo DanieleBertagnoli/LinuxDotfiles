@@ -89,6 +89,7 @@ yay_packages=(
     trizen
     sddm-sugar-candy
     grub-btrfs
+    aylurs-gtk-shell
 )
 
 #for package in "${pacman_packages[@]}"; do
