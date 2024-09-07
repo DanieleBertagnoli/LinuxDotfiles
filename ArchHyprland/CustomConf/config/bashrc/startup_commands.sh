@@ -19,3 +19,6 @@ if ! pgrep -f gnome-keyring-daemon > /dev/null ; then
 fi
 
 eval "$(starship init bash)"
+
+# Apply pywal colors to the terminal
+cat ~/.cache/wal/sequences

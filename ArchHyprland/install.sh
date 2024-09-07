@@ -77,6 +77,7 @@ pacman_packages=(
     breeze
     qt6ct
     gtk4
+    gtk3
     nwg-look
     dunst
     fastfetch
@@ -84,14 +85,14 @@ pacman_packages=(
 
 # Packages to be installed using yay
 yay_packages=(
-    wlogout 
-    ags 
+    wlogout  
     bibata-cursor-theme 
     waypaper 
     timeshift 
     trizen
     grub-btrfs
     aylurs-gtk-shell
+    bun-bin
     #sddm-sugar-candy
 )
 
