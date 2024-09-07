@@ -74,6 +74,7 @@ pacman_packages=(
     breeze
     qt6ct
     gtk4
+    gtk3
     nwg-look
     dunst
     fastfetch
