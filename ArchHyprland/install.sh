@@ -49,6 +49,7 @@ fi
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
+clear
 
 
 ###########################
@@ -106,6 +107,7 @@ done
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
+clear
 
 
 ################################
@@ -119,10 +121,12 @@ cp ./CustomConf/.bashrc ~/.bashrc
 cp -r Wallpapers/ ~/Pictures
 
 ~/.config/dotfiles/scripts/set_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png
+~/.config/dotfiles/scripts/set_sddm_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png
 ~/.config/dotfiles/scripts/set_gtk.sh
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
+clear
 
 
 ########################
@@ -142,6 +146,7 @@ sudo cp ~/.config/sddm/theme.conf /usr/share/sddm/themes/sugar-candy/
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
+clear
 
 
 ######################
