@@ -118,13 +118,14 @@ clear
 #                              #
 ################################
 
+figlet -f big "CONFIGUARION FILES"
+
 cp -r ./CustomConf/config/* ~/.config
 cp ./CustomConf/.bashrc ~/.bashrc
 cp -r Wallpapers/ ~/Pictures
 
-~/.config/dotfiles/scripts/set_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png
-~/.config/dotfiles/scripts/set_sddm_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png
-~/.config/dotfiles/scripts/set_gtk.sh
+~/.config/dotfiles/scripts/set_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png &> /dev/null
+~/.config/dotfiles/scripts/set_gtk.sh &> /dev/null
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
@@ -137,6 +138,8 @@ clear
 #                      #
 ########################
 
+figlet -f big "SDDM"
+
 sudo systemctl enable sddm.service
 
 if [ ! -d /etc/sddm.conf.d/ ]; then
@@ -144,7 +147,10 @@ if [ ! -d /etc/sddm.conf.d/ ]; then
 fi
 
 sudo cp ~/.config/sddm/sddm.conf /etc/sddm.conf.d/
+# TODO download the theme
 sudo cp ~/.config/sddm/theme.conf /usr/share/sddm/themes/sugar-candy/
+
+~/.config/dotfiles/scripts/set_sddm_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png &> /dev/null
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
@@ -157,9 +163,69 @@ clear
 #                    #
 ######################
 
+figlet -f big "NVIDIA"
+
 # Ask if the user is using a proprietary NVIDIA card
 echo -e "\n\nAre you using an NVIDIA GPU?"
 answer=$(gum choose "Yes" "No")
 if [ "$answer" == "Yes" ]; then
     # TODO
 fi
+
+echo -e "\n\nPress [ENTER] to continue..."
+read
+clear
+
+################
+#              #
+#   Programs   # 
+#              #
+################
+
+clear
+figlet -f big "PROGRAMS"
+
+# Ask if the user wants to download programs
+if gum confirm "Do you want to download some programs (Visual studio, Discord, etc...)? You can select which one." ;then
+    echo
+else
+    clear
+    figlet -f big COMPLETED
+    exit 0
+fi
+
+# Use gum to create a list where the user can pick which packages to install
+packages=$(gum choose --no-limit "Visual Studio Code" "Bitwarden" "Vesktop (Discord for Wayland)")
+
+# Output the selected packages
+echo "Selected packages: $packages"
+
+# Save original IFS
+OLD_IFS=$IFS
+
+# Use IFS to handle multiple selections properly
+IFS=$'\n'
+
+# Install the selected packages
+for package in $packages; do
+    echo "Installing $package..."
+    case "$package" in
+        "Visual Studio Code")
+            install visual-studio-code-bin yay
+            ;;
+        "Bitwarden")
+            install bitwarden yay
+            ;;
+        "Vesktop (Discord for Wayland)")
+            install vesktop yay
+            ;;
+    esac
+done
+
+IFS=$OLD_IFS
+
+echo -e "\n\nPress [ENTER] to continue..."
+read
+clear
+
+figlet -f big COMPLETED
