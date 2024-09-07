@@ -24,13 +24,19 @@ install() {
 
 cd $(dirname $0)
 
+
 #############
 #           #
 #   Start   # 
 #           #
 #############
 
-figlet -f big "Dotfiles"
+sudo pacman -Syu
+
+install gum yay
+install figlet yay
+
+figlet -f big "DOTFILES"
 
 if gum confirm "Do you want to start the dotfiles installation?" ;then
     echo -e "\nLet's go.\n"
@@ -41,12 +47,8 @@ else
     exit;
 fi
 
-sudo pacman -Syu
-
-install gum yay
-install figlet yay
-
-clear
+echo -e "\n\nPress [ENTER] to continue..."
+read
 
 
 ###########################
@@ -55,11 +57,12 @@ clear
 #                         #
 ###########################
 
-figlet -f big "Installing packages"
+figlet -f big "INSTALLING PACKAGES"
 
 # Packages to be installed using pacman
 pacman_packages=(
     hyprland
+    sddm
     alacritty
     nautilus
     waybar
@@ -87,20 +90,21 @@ yay_packages=(
     waypaper 
     timeshift 
     trizen
-    sddm-sugar-candy
     grub-btrfs
     aylurs-gtk-shell
+    #sddm-sugar-candy
 )
 
-#for package in "${pacman_packages[@]}"; do
-#    install $package "pacman"
-#done
+for package in "${pacman_packages[@]}"; do
+    install $package "pacman"
+done
 
-#for package in "${yay_packages[@]}"; do
-#    install $package "yay"
-#done
+for package in "${yay_packages[@]}"; do
+    install $package "yay"
+done
 
-clear
+echo -e "\n\nPress [ENTER] to continue..."
+read
 
 
 ################################
@@ -116,7 +120,8 @@ cp -r Wallpapers/ ~/Pictures
 ~/.config/dotfiles/scripts/set_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png
 ~/.config/dotfiles/scripts/set_gtk.sh
 
-clear
+echo -e "\n\nPress [ENTER] to continue..."
+read
 
 
 ########################
@@ -134,7 +139,8 @@ fi
 sudo cp ~/.config/sddm/sddm.conf /etc/sddm.conf.d/
 sudo cp ~/.config/sddm/theme.conf /usr/share/sddm/themes/sugar-candy/
 
-clear
+echo -e "\n\nPress [ENTER] to continue..."
+read
 
 
 ######################
