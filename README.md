@@ -1,7 +1,11 @@
 # Linux Dotfiles 🐧
-These are my personal dotfiles for setting up fastly my systems after a fresh installation. In each distribution's folder a `install.sh` file is available, these are designed to guide you step-by-step during the installation as some manual steps may be required. These dotfiles are useful to install quickly some essential programs and themes to make your system prettier.
+These are my personal dotfiles for setting up fastly my systems after a fresh installation. In each distribution's folder a `install.sh` file is available, these are designed to guide you step-by-step during the installation. These dotfiles are useful to install quickly some essential programs and themes to make your system prettier.
 
 Please feel free to open issues or contact me to discuss about possible bugs, problems or improvements. 
+
+## Roadmap
+- [ ] Refactor Ubuntu dotfiles
+- [ ] Adapt Arch dotfiles to clean Arch installtions (up to now works only for EndevourOS)
 
 ## Ubuntu dotfiles &nbsp; <img src="Images/ubuntu.png" width="30">
 These dotfiles are used to set up Ubuntu-GNOME systems (you can slightly modify some commands to adapt it to any Debian-based distribution). To run the setup, simply run the commands:
@@ -35,28 +39,17 @@ We also ship a set of wallpapers that will be copied into `~/Pictures/Wallpapers
 
 ## Arch - Hyprland dotfiles &nbsp; <img src="Images/arch.png" width="30"> + <img src="Images/hyprland.png" width="80">
 
-These dotfiles are built upon the huge GitHub project [ML4FW Dotfiles](https://github.com/mylinuxforwork/dotfiles). Indeed, I strongly recommend to see the detailed [wiki](https://github.com/mylinuxforwork/dotfiles/wiki) written by the author to customize and modify the system. My dotfiles are done to remove some unwanted packages and to install some useful packages. I also ship some custom configurations such as the monitors one and a modified .bashrc file. To run the installation script (shortcut to the ML4W installtion command), run the following commands:
-
+These dotfiles are built inspired by the huge GitHub project [ML4FW Dotfiles](https://github.com/mylinuxforwork/dotfiles). My dotfiles are developed to reduce the useless packages, providing a lighter installation, yet fully configured and customizable. To start, run the following commands
 ```ssh
 # Clone the repository
 git clone https://github.com/DanieleBertagnoli/LinuxDotfiles
-cd LinuxDotfiles
-
-# Make the script executable
-sudo chmod +x ArchHyprland/install*
+cd LinuxDotfiles/ArchHyprland
 
 # Run the script
-./ArchHyprland/install.sh
+./install.sh
 ```
 
-After that you can run the post-installation script that allows you to install/remove additional packages and custom configurations:
-
-```ssh
-# Run the script
-./ArchHyprland/install_configs.sh
-```
-
-After that, run the ML4W Welcome application and go to `Settings>System>Monitor Variations>System` and from `Monitor Variations` choose `my_monitors.conf`. You can also modify the monitors resolutions and setup (if you have more than one monitor) by modifying that configuration file (follow the official [Hyprland Wiki](https://wiki.hyprland.org/Configuring/Monitors/)).
+For all the settings and customizations, follow the Wiki.
 
 
 ## Issues 🚨
