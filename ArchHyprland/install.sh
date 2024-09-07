@@ -73,6 +73,7 @@ pacman_packages=(
     python-pywal
     hyprlock
     eza
+    ttf-font-awesome
     ttf-nerd-fonts-symbols
     gnome-keyring
     breeze
@@ -82,6 +83,7 @@ pacman_packages=(
     nwg-look
     dunst
     fastfetch
+    brightnessctl
 )
 
 # Packages to be installed using yay
