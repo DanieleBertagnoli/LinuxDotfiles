@@ -36,7 +36,7 @@ wallpaper=$1
 
 # Run pywal to change the color schemeì
 wal -q -i $wallpaper
-source ~/.cache/wal/colors.sh
+source $HOME/.cache/wal/colors.sh
 
 # Restart hyprpaper
 killall -e hyprpaper & 
@@ -47,8 +47,10 @@ echo "$output" > ~/.config/hypr/hyprpaper.conf
 hyprpaper & > /dev/null 2>&1
 
 # Reload ags
-# killall ags
-# ags &
+killall ags
+ags &
+
+~/.config/waybar/launch.sh
 
 # Create the blurred version of the wallpaper (used in wlogout)
 magick $wallpaper -resize 75% $blurred_wallpaper
