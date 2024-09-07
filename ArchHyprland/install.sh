@@ -90,6 +90,7 @@ yay_packages=(
     sddm-sugar-candy
     grub-btrfs
     aylurs-gtk-shell
+    bun-bin
 )
 
 #for package in "${pacman_packages[@]}"; do
