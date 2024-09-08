@@ -56,3 +56,6 @@ For all the settings and customizations, follow the Wiki.
 
 ## Issues 🚨
 Feel free to contact me or open a public issue. Help me improve the project!
+
+## Changelog
+For the full changelog, see [CHANGELOG.md](CHANGELOG.md).
