@@ -36,6 +36,8 @@ sudo pacman -Syu
 install gum yay
 install figlet yay
 
+clear
+
 figlet -f big "DOTFILES"
 
 if gum confirm "Do you want to start the dotfiles installation?" ;then
@@ -96,7 +98,7 @@ yay_packages=(
     grub-btrfs
     aylurs-gtk-shell
     bun-bin
-    #sddm-sugar-candy
+    sddm-sugar-dark
 )
 
 for package in "${pacman_packages[@]}"; do
@@ -118,7 +120,7 @@ clear
 #                              #
 ################################
 
-figlet -f big "CONFIGUARION FILES"
+figlet -f big "CONFIGURATION FILES"
 
 cp -r ./CustomConf/config/* ~/.config
 cp ./CustomConf/.bashrc ~/.bashrc
@@ -147,8 +149,7 @@ if [ ! -d /etc/sddm.conf.d/ ]; then
 fi
 
 sudo cp ~/.config/sddm/sddm.conf /etc/sddm.conf.d/
-# TODO download the theme
-sudo cp ~/.config/sddm/theme.conf /usr/share/sddm/themes/sugar-candy/
+sudo cp ~/.config/sddm/theme.conf /usr/share/sddm/themes/sugar-dark/
 
 ~/.config/dotfiles/scripts/set_sddm_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png &> /dev/null
 
@@ -169,7 +170,7 @@ figlet -f big "NVIDIA"
 echo -e "\n\nAre you using an NVIDIA GPU?"
 answer=$(gum choose "Yes" "No")
 if [ "$answer" == "Yes" ]; then
-    # TODO
+    echo # TODO
 fi
 
 echo -e "\n\nPress [ENTER] to continue..."
