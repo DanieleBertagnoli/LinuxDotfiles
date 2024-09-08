@@ -70,7 +70,7 @@
     "return-type": "json",
     "exec": "~/.config/dotfiles/scripts/updates.sh",
     "restart-interval": 60,
-    "on-click": "alacritty --class dotfiles-floating -e ~/.config/dotfiles/scripts/install_updates.sh"
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e ~/.config/dotfiles/scripts/install_updates.sh"
   },
 
   // Wallpaper
@@ -126,13 +126,13 @@
   // CPU
   "cpu": {
     "format": " C {usage}% ",
-    "on-click": "alacritty --class dotfiles-floating -e htop"
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop"
   },
 
   // Memory
   "memory": {
     "format": " M {}%",
-    "on-click": "alacritty --class dotfiles-floating -e htop"
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop"
   },
 
   // Harddisc space used
@@ -140,7 +140,7 @@
     "interval": 10,
     "format": "D {percentage_used}% ",
     "path": "/",
-    "on-click": "alacritty --class dotfiles-floating -e htop"
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop"
   },
 
   // Group Hardware
@@ -181,7 +181,7 @@
     "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
-    "on-click": "alacritty --class dotfiles-floating -e nmtui"
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e nmtui"
   },
 
   // Battery
@@ -268,23 +268,30 @@
     "on-click": "chromium",
     "tooltip-format": "Open Chromium"
   }, 
+  "custom/brave": {
+    "format": "",
+    "on-click": "brave",
+    "tooltip-format": "Open Brave"
+  }, 
   "custom/firefox": {
     "format": "",
     "on-click": "firefox",
     "tooltip-format": "Open Firefox"
   },
-  "custom/nautilus": {
+  "custom/filemanager": {
     "format": "",
-    "on-click": "nautilus",
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run filemanager",
     "tooltip-format": "Open filemanager"
   },
   "custom/quicklinkempty": {
   }, 
+
+
   "group/quicklinks": {
     "orientation": "horizontal",
     "modules": [
         "custom/firefox",
-        "custom/nautilus"
+        "custom/filemanager"
     ]
   }
 }

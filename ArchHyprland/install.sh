@@ -60,9 +60,6 @@ figlet -f big "INSTALLING PACKAGES"
 # Packages to be installed using pacman
 pacman_packages=(
     hyprland
-    sddm
-    alacritty
-    nautilus
     waybar
     hyprpaper
     starship
@@ -138,6 +135,87 @@ read
 clear
 
 
+#############################
+#                           #
+#   Configurable Packages   # 
+#                           #
+#############################
+
+figlet -f big "OTHER PACKAGES"
+
+# Terminal
+echo -e "\n\nPick your terminal emulator"
+answer=$(gum choose "Alacritty" "Kitty" "ZSH")
+if [ $answer == "Alacritty" ]; then
+    answer="alacritty"
+    from="pacman"
+
+elif [ $answer == "Kitty" ]; then
+    answer="kitty"
+    from="pacman"
+
+elif [ $answer == "ZSH" ]; then
+    answer="zsh"
+    from="pacman"
+    
+else
+    echo -e "\n\nERROR OPTION $answer NOT VALID"
+    exit 1
+fi
+
+install $answer $from
+
+~/.config/dotfiles/scripts/applications.sh "set" "terminal" $answer 
+
+# Browser
+echo -e "\n\nPick your browser"
+answer=$(gum choose "Firefox" "Brave" "Chromium")
+if [ $answer == "Firefox" ]; then
+    answer="firefox"
+    from="pacman"
+
+elif [ $answer == "Brave" ]; then
+    answer="brave"
+    from="yay"
+
+elif [ $answer == "Chromium" ]; then
+    answer="chromium"
+    from="yay"
+
+else
+    echo -e "\n\nERROR OPTION $answer NOT VALID"
+    exit 1
+fi
+
+install $answer $from
+
+~/.config/dotfiles/scripts/applications.sh "set" "browser" $answer 
+
+# File manager
+echo -e "\n\nPick your browser"
+answer=$(gum choose "Nautilus" "Dolphin")
+if [ $answer == "Nautilus" ]; then
+    answer="nautilus"
+    from="pacman"
+
+elif [ $answer == "Dolphin" ]; then
+    answer="dolphin"
+    from="pacman"
+
+else
+    echo -e "\n\nERROR OPTION $answer NOT VALID"
+    exit 1
+fi
+
+install $answer $from
+
+~/.config/dotfiles/scripts/applications.sh "set" "filemanager" $answer 
+
+echo -e "\n\nPress [ENTER] to continue..."
+read
+clear
+
+
 ########################
 #                      #
 #   Setup SDDM theme   # 
@@ -151,6 +229,10 @@ downloads_folder=$(xdg-user-dir DOWNLOAD)
 echo -e "\n\nDo you want to use SDDM?"
 answer=$(gum choose "Yes" "No")
 if [ "$answer" == "Yes" ]; then
+
+    # Install sddm
+    install "sddm" "pacman"
+
     # Enable sddm
     if [ -f /etc/systemd/system/display-manager.service ]; then
         sudo rm /etc/systemd/system/display-manager.service

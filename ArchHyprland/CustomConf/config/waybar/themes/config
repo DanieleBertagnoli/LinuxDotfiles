@@ -30,7 +30,8 @@
         "custom/appmenu",
         "group/settings",
         "custom/wallpaper",
-        "group/quicklinks",
+        "custom/firefox",
+        "custom/filemanager",
         "group/hardware",
         "hyprland/window",
         "custom/empty"

@@ -10,7 +10,7 @@
 # |_|     \____/|_____/   |_|   
 #
 
-if ! -f ~/.config/dotfiles/cache/do_post_install ; then
+if [ ! -f ~/.config/dotfiles/cache/do_post_install ]; then
     exit 0
 fi
 
@@ -26,7 +26,7 @@ echo "$hyprctl_output" | awk '
     print "monitor=" monitor_name ",preferred,auto,1"
 }' >> ~/.config/hypr/configs/monitors.conf
 
-$pictures_folder=$(xdg-user-dirs PICTURES)
+$pictures_folder=$(xdg-user-dir PICTURES)
 
 # Set random wallpaper
 waypaper --random
