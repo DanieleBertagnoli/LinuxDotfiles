@@ -1,7 +1,7 @@
 # Linux Dotfiles 🐧
-These are my personal dotfiles for setting up fastly my systems after a fresh installation. In each distribution's folder a `install.sh` file is available, these are designed to guide you step-by-step during the installation. These dotfiles are useful to install quickly some essential programs and themes to make your system prettier.
+These are my personal dotfiles for quickly setting up my systems after a fresh installation. In each distribution's folder, you'll find an `install.sh` file, designed to guide you step-by-step through the installation process. These dotfiles help install essential programs and themes to enhance both functionality and appearance.
 
-Please feel free to open issues or contact me to discuss about possible bugs, problems or improvements. 
+Feel free to open issues or contact me to discuss any bugs, problems, or potential improvements.
 
 ## Roadmap
 - [ ] Refactor Ubuntu dotfiles
