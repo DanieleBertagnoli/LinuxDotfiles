@@ -6,7 +6,7 @@ Please feel free to open issues or contact me to discuss about possible bugs, pr
 ## Roadmap
 - [ ] Refactor Ubuntu dotfiles
 - [ ] Adapt Arch dotfiles to clean Arch installtions (up to now works only for EndevourOS)
-- [ ] ArchHyprland: Add Bluetooth support
+- [x] ArchHyprland: Add Bluetooth support and laptop configuration
 - [ ] Update Wiki
 
 ## Ubuntu dotfiles &nbsp; <img src="Images/ubuntu.png" width="30">
