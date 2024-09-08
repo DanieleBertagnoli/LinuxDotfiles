@@ -34,7 +34,7 @@ fi
 
 wallpaper=$1
 
-# Run pywal to change the color schemeì
+# Run pywal to change the color scheme
 wal -q -i $wallpaper
 source $HOME/.cache/wal/colors.sh
 
