@@ -21,3 +21,7 @@ alias shutdown='systemctl poweroff'
 alias ts='~/.config/ml4w/scripts/snapshot.sh'
 alias wifi='nmtui'
 alias autoclean='sudo pacman -Rcns $(pacman -Qdtq)'
+
+alias set_sddm_wallpaper='~/.config/dotfiles/scripts/set_sddm_wallpaper.sh'
+
+alias dw='cd ~/Downloads'
