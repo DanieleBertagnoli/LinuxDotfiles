@@ -20,6 +20,7 @@ function print_usage() {
 }
 
 blurred_wallpaper=~/.config/dotfiles/cache/blurred_wallpaper.png
+squared_wallpaper=~/.config/dotfiles/cache/squared_wallpaper.png
 
 if [ ! -d ~/.config/dotfiles/cache ]; then
     mkdir -p ~/.config/dotfiles/cache
@@ -57,6 +58,9 @@ magick $wallpaper -resize 75% $blurred_wallpaper
 if [ ! "$blur" == "0x0" ] ;then
     magick $blurred_wallpaper -blur $blur $blurred_wallpaper
 fi
+
+# Create the squared version of the wallpaper (used in hyprlock)
+magick $wallpaper -gravity Center -extent 1:1 $squared_wallpaper
 
 # Create the rasi file
 if [ ! -f $rasi_file ] ;then
