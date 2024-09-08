@@ -125,20 +125,20 @@
 
   // CPU
   "cpu": {
-    "format": " CPU {usage}% ",
+    "format": " C {usage}% ",
     "on-click": "alacritty --class dotfiles-floating -e htop"
   },
 
   // Memory
   "memory": {
-    "format": " Mem {}%",
+    "format": " M {}%",
     "on-click": "alacritty --class dotfiles-floating -e htop"
   },
 
   // Harddisc space used
   "disk": {
     "interval": 10,
-    "format": "Disk {percentage_used}% ",
+    "format": "D {percentage_used}% ",
     "path": "/",
     "on-click": "alacritty --class dotfiles-floating -e htop"
   },

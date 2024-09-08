@@ -98,7 +98,7 @@ tooltip label {
 
 #window {
     background: @backgroundlight;
-    margin: 8px 15px 8px 0px;
+    margin: 8px 15px 8px 15px;
     padding: 2px 10px 0px 10px;
     border-radius: 12px;
     color:@textcolor2;
