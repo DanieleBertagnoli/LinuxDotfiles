@@ -40,4 +40,4 @@ if [[ "$current_wallpaper" != *.png && "$current_wallpaper" != *.jpg && "$curren
 fi
 
 # Copy the wallpaper to the SDDM theme directory
-sudo cp "$current_wallpaper" /usr/share/sddm/themes/sugar-dark/Background.png
+sudo cp "$current_wallpaper" /usr/share/sddm/themes/sugar-candy/Backgrounds/Background.png

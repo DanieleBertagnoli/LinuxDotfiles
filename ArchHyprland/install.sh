@@ -86,6 +86,10 @@ pacman_packages=(
     dunst
     fastfetch
     brightnessctl
+    xdg-desktop-portal-hyprland
+    qt5-graphicaleffects 
+    qt5-quickcontrols2 
+    qt5-svg
 )
 
 # Packages to be installed using yay
@@ -142,6 +146,11 @@ clear
 
 figlet -f big "SDDM"
 
+# Enable sddm
+if [ -f /etc/systemd/system/display-manager.service ]; then
+    sudo rm /etc/systemd/system/display-manager.service
+fi
+
 sudo systemctl enable sddm.service
 
 if [ ! -d /etc/sddm.conf.d/ ]; then
@@ -149,7 +158,10 @@ if [ ! -d /etc/sddm.conf.d/ ]; then
 fi
 
 sudo cp ~/.config/sddm/sddm.conf /etc/sddm.conf.d/
-sudo cp ~/.config/sddm/theme.conf /usr/share/sddm/themes/sugar-dark/
+
+wget -P ~/Downloads/sddm-sugar-candy https://github.com/Kangie/sddm-sugar-candy/archive/refs/heads/master.zip
+unzip -o -q ~/Downloads/sddm-sugar-candy/master.zip -d ~/Downloads/sddm-sugar-candy
+sudo cp -r ~/Downloads/sddm-sugar-candy/sddm-sugar-candy-master /usr/share/sddm/themes/sugar-candy
 
 ~/.config/dotfiles/scripts/set_sddm_wallpaper.sh ~/Pictures/Wallpapers/wallpaper_1.png &> /dev/null
 
