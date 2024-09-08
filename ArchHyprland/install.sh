@@ -208,6 +208,54 @@ echo -e "\n\nPress [ENTER] to continue..."
 read
 clear
 
+
+#########################
+#                       #
+#   Bluetooth support   # 
+#                       #
+#########################
+
+figlet -f big "Bluetooth"
+
+# Ask if the user is using a bluetooth adapter
+echo -e "\n\nDo you have a bluetooth adapter?"
+answer=$(gum choose "Yes" "No")
+if [ "$answer" == "Yes" ]; then
+    echo -e "\n\nInstalling bluetooth modules"
+    install bluez pacman
+    install bluez-utils pacman
+    install blueman pacman 
+    sudo systemctl enable bluetooth.service
+fi
+
+echo -e "\n\nPress [ENTER] to continue..."
+read
+clear
+
+
+############################
+#                          #
+#   Laptop configuration   # 
+#                          #
+############################
+
+figlet -f big "Laptop"
+
+# Ask if the user is using a laptop
+echo -e "\n\nAre you using a laptop?"
+answer=$(gum choose "Yes" "No")
+if [ "$answer" == "Yes" ]; then
+    echo -e "\n\nUsing laptop configuration"
+    cat ~/.config/hypr/configs/keyboards/laptop.conf > ~/.config/hypr/configs/keyboard.conf
+else
+    echo -e "\n\nUsing desktop configuration"
+    cat ~/.config/hypr/configs/keyboards/desktop.conf > ~/.config/hypr/configs/keyboard.conf
+fi
+
+echo -e "\n\nPress [ENTER] to continue..."
+read
+clear
+
 ################
 #              #
 #   Programs   # 
