@@ -13,17 +13,15 @@
 # Screenshots will be stored in $HOME by default.
 # The screenshot will be moved into the screenshot directory
 
-# Add this to ~/.config/user-dirs.dirs to save screenshots in a custom folder: 
-# XDG_SCREENSHOTS_DIR="$HOME/Screenshots"
+screenshot_folder=$(xdg-user-dir PICTURES)/Screenshot
 
 prompt='Screenshot'
-mesg="DIR: ~/Screenshots"
+mesg="DIR: $screenshot_folder"
 
 # Screenshot Filename
 NAME="screenshot_$(date +%d%m%Y_%H%M%S).jpg"
 
 # Screenshot Folder
-screenshot_folder=~/Pictures/Screenshots
 if [ ! -d $screenshot_folder ]; then
     mkdir -p $screenshot_folder
 fi

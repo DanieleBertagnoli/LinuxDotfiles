@@ -85,6 +85,11 @@ pacman_packages=(
     qt5-graphicaleffects 
     qt5-quickcontrols2 
     qt5-svg
+    grim
+    slurp
+    cliphist
+    vlc
+    pinta
 )
 
 # Packages to be installed using yay
@@ -97,7 +102,8 @@ yay_packages=(
     grub-btrfs
     aylurs-gtk-shell
     bun-bin
-    sddm-sugar-dark
+    grimblast
+    qiv
 )
 
 for package in "${pacman_packages[@]}"; do
