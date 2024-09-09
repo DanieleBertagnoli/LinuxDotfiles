@@ -23,7 +23,7 @@ echo "$hyprctl_output" | awk '
 }
 /availableModes/ { 
     # Print monitor name and fixed preferred, auto, 1
-    print "monitor=" monitor_name ",preferred,auto,1"
+    print "\n\nmonitor=" monitor_name ",preferred,auto,1"
 }' >> ~/.config/hypr/configs/monitors.conf
 
 $pictures_folder=$(xdg-user-dir PICTURES)
