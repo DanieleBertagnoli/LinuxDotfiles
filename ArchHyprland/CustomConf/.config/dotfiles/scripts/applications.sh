@@ -79,6 +79,12 @@ if [ "$action" == "set" ]; then
             exit 1
         fi
 
+        # Check for chromium-based.conf
+        if [ "$browser" = "brave" ] || { [ "$browser" = "chromium" ] && [ ! -f "$HOME/.config/$browser-flags.conf" ]; }; then
+            echo "Creating flags file"
+            echo "--enable-features=TouchpadOverscrollHistoryNavigation\n--ozone-platform=wayland" > "$HOME/.config/$browser-flags.conf"
+        fi
+
         # List of supported browsers in the waybar config
         browsers=("custom/firefox" "custom/brave" "custom/chromium")
 
