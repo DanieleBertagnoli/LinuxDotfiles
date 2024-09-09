@@ -338,6 +338,38 @@ echo -e "\n\nPress [ENTER] to continue..."
 read
 clear
 
+
+#######################
+#                     #
+#   Keyboard Layout   # 
+#                     #
+#######################
+
+figlet -f big "KEYBOARD"
+
+# Default values
+kb_layout="us"
+kb_variant=""
+
+# Ask for keyboard layout
+if gum confirm "Do you want to specify the keyboard layout? (Default: us)" ; then
+    kb_layout=$(gum input --placeholder "Enter keyboard layout (e.g. us, uk, de)" --value "")
+fi
+
+# Ask for keyboard variant if a layout was provided
+if gum confirm "Do you want to specify the keyboard variant? (Leave empty for default)" ; then
+    kb_variant=$(gum input --placeholder "Enter keyboard variant (e.g. dvorak, intl, etc.)" --value "")
+fi
+
+# Replace the placeholders LAYOUT and VARIANT using sed
+sed -i "s/LAYOUT/$kb_layout/" ~/.config/hypr/configs/keyboard.conf
+sed -i "s/VARIANT/$kb_variant/" ~/.config/hypr/configs/keyboard.conf
+
+echo -e "\n\nPress [ENTER] to continue..."
+read
+clear
+
+
 ################
 #              #
 #   Programs   # 
