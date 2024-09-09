@@ -126,7 +126,7 @@ figlet -f big "CONFIGURATION FILES"
 
 pictures_folder=$(xdg-user-dir PICTURES)
 
-cp -r ./CustomConf/config/* ~/.config
+cp -r ./CustomConf/.config/* ~/.config
 cp ./CustomConf/.bashrc ~/.bashrc
 cp -r Wallpapers/ $pictures_folder
 
@@ -149,6 +149,7 @@ answer=$(gum choose "Alacritty" "Kitty" "ZSH")
 if [ $answer == "Alacritty" ]; then
     answer="alacritty"
     from="pacman"
+    cp -r ./CustomConf/.config-optional/alacritty ~/.config
 
 elif [ $answer == "Kitty" ]; then
     answer="kitty"
@@ -177,10 +178,12 @@ if [ $answer == "Firefox" ]; then
 elif [ $answer == "Brave" ]; then
     answer="brave"
     from="yay"
+    cp -r ./CustomConf/.config-optional/chromium-flags.conf ~/.config/brave-flags.conf
 
 elif [ $answer == "Chromium" ]; then
     answer="chromium"
     from="yay"
+    cp -r ./CustomConf/.config-optional/chromium-flags.conf ~/.config/
 
 else
     echo -e "\n\nERROR OPTION $answer NOT VALID"
@@ -232,6 +235,9 @@ if [ "$answer" == "Yes" ]; then
 
     # Install sddm
     install "sddm" "pacman"
+
+    # Copy configuration files
+    cp -r ./CustomConf/.config-optional/sddm ~/.config/
 
     # Enable sddm
     if [ -f /etc/systemd/system/display-manager.service ]; then
