@@ -14,10 +14,6 @@
 
 fastfetch --config examples/13
 
-if ! pgrep -f gnome-keyring-daemon > /dev/null ; then
-    eval $(gnome-keyring-daemon --start)
-fi
-
 eval "$(starship init bash)"
 
 # Apply pywal colors to the terminal
