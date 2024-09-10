@@ -78,7 +78,6 @@ pacman_packages=(
     dunst
     fastfetch
     brightnessctl
-    xdg-desktop-portal-hyprland
     qt5-graphicaleffects 
     qt5-quickcontrols2 
     qt5-svg
@@ -87,6 +86,8 @@ pacman_packages=(
     cliphist
     vlc
     pinta
+    wireplumber
+    pipewire
 )
 
 # Packages to be installed using yay
@@ -101,6 +102,7 @@ yay_packages=(
     bun-bin
     grimblast
     qiv
+    xdg-desktop-portal-hyprland-git
 )
 
 for package in "${pacman_packages[@]}"; do
