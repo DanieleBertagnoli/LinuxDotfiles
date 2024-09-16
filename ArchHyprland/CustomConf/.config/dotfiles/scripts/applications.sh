@@ -66,10 +66,9 @@ if [ "$action" == "set" ]; then
     
     if [ "$key" == "browser" ]; then
 
-        # Define file paths
-        modules_file="$HOME/.config/waybar/modules.json"
-        temp_file="$modules_file.tmp"
-
+        # Define paths for the themes directory
+        themes_dir="$HOME/.config/waybar/themes"
+        
         # Read the preferred browser from app_preferences.conf
         browser=$(grep -i 'browser=' "$config_file" | cut -d'=' -f2)
 
@@ -85,28 +84,33 @@ if [ "$action" == "set" ]; then
             echo -e "--enable-features=TouchpadOverscrollHistoryNavigation\n--ozone-platform=wayland" > "$HOME/.config/$browser-flags.conf"
         fi
 
-        # Check if modules.json exists
-        if [ -f "$modules_file" ]; then
-            # Backup the original file
-            cp "$modules_file" "$modules_file.bak"
+        # Loop through all theme directories
+        for theme_dir in "$themes_dir"/*; do
+            modules_file="$theme_dir/modules.json"
+            temp_file="$modules_file.tmp"
 
-            # Remove comments and process JSON
-            sed '/^\s*\/\//d' "$modules_file" | jq --arg new_browser "custom/$browser" '
-                .["group/group-apps"].modules |= map(if test("custom/(chromium|brave|firefox)") then $new_browser else . end)
-            ' > "$temp_file"
+            # Check if modules.json exists for the current theme
+            if [ -f "$modules_file" ]; then
+                # Backup the original file
+                cp "$modules_file" "$modules_file.bak"
 
-            # Check if jq succeeded and restore the file
-            if [ $? -eq 0 ]; then
-                mv "$temp_file" "$modules_file"
-                echo "Updated Waybar modules.json with browser: $browser"
+                # Remove comments and process JSON
+                sed '/^\s*\/\//d' "$modules_file" | jq --arg new_browser "custom/$browser" '
+                    .["group/group-apps"].modules |= map(if test("custom/(chromium|brave|firefox)") then $new_browser else . end)
+                ' > "$temp_file"
+
+                # Check if jq succeeded and restore the file
+                if [ $? -eq 0 ]; then
+                    mv "$temp_file" "$modules_file"
+                    echo "Updated Waybar modules.json in theme: $theme_dir with browser: $browser"
+                else
+                    echo "Failed to update modules.json in theme: $theme_dir"
+                    exit 1
+                fi
             else
-                echo "Failed to update modules.json"
-                exit 1
+                echo "$modules_file not found in theme: $theme_dir"
             fi
-        else
-            echo "$modules_file not found!"
-            exit 1
-        fi
+        done
     fi
 
 
