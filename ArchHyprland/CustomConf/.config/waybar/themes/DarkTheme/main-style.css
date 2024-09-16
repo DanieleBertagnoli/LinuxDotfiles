@@ -169,6 +169,11 @@ tooltip label {
 }
 
 /* Updates */
+#custom-updates.hidden {
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+}
 #custom-updates.yellow {
     color: @yellow-color;
 }

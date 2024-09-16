@@ -35,5 +35,10 @@ if [ "$updates" -gt $threshold_red ]; then
     css_class="red"
 fi
 
-# This print is used in the waybar module
-printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system", "class":"%s"}' "$updates" "$updates" "$css_class"
+if [ $updates -gt 0 ]; then
+    # This print is used in the waybar module
+    printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system", "class":"%s"}' "$updates" "$updates" "$css_class"
+else
+    # This print is used in the waybar module
+    printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system", "class":"%s"}' "$updates" "$updates" "hidden"
+fi
