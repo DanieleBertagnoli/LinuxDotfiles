@@ -147,12 +147,12 @@
 
 
   // Browsers
-  "custom/firefox": {
+  "custom/chromium": {
     "format": "",
     "on-click": "chromium",
     "tooltip-format": "Open Chromium"
   }, 
-  "custom/firefox": {
+  "custom/brave": {
     "format": "",
     "on-click": "brave",
     "tooltip-format": "Open Brave"
@@ -280,7 +280,7 @@
     "modules": [
       "custom/rofi", 
       "custom/wallpaper", 
-      "custom/firefox",
+      "custom/brave",
       "custom/filemanager"
     ]
   },

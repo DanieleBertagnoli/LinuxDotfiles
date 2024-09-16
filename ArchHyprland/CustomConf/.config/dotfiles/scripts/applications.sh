@@ -63,11 +63,12 @@ if [ "$action" == "set" ]; then
         echo "$key=$value" >> "$config_file"
         echo "Added: $key=$value to $config_file"
     fi
-
+    
     if [ "$key" == "browser" ]; then
 
-        # Define the path to the modules.json file
+        # Define file paths
         modules_file="$HOME/.config/waybar/modules.json"
+        temp_file="$modules_file.tmp"
 
         # Read the preferred browser from app_preferences.conf
         browser=$(grep -i 'browser=' "$config_file" | cut -d'=' -f2)
@@ -81,26 +82,31 @@ if [ "$action" == "set" ]; then
         # Check for chromium-based.conf
         if [ "$browser" = "brave" ] || { [ "$browser" = "chromium" ] && [ ! -f "$HOME/.config/$browser-flags.conf" ]; }; then
             echo "Creating flags file"
-            echo "--enable-features=TouchpadOverscrollHistoryNavigation\n--ozone-platform=wayland" > "$HOME/.config/$browser-flags.conf"
+            echo -e "--enable-features=TouchpadOverscrollHistoryNavigation\n--ozone-platform=wayland" > "$HOME/.config/$browser-flags.conf"
         fi
 
-        # List of supported browsers in the modules.json
-        browsers=("custom/firefox" "custom/brave" "custom/chromium")
-
-        # Ensure the modules.json file exists
+        # Check if modules.json exists
         if [ -f "$modules_file" ]; then
-            echo "Updating $modules_file..."
+            # Backup the original file
+            cp "$modules_file" "$modules_file.bak"
 
-            # Replace the old browser setting with the new one in the modules.json file
-            for old_browser in "${browsers[@]}"; do
-                sed -i "s|$old_browser|custom/$browser|g" "$modules_file"
-            done
+            # Remove comments and process JSON
+            sed '/^\s*\/\//d' "$modules_file" | jq --arg new_browser "custom/$browser" '
+                .["group/group-apps"].modules |= map(if test("custom/(chromium|brave|firefox)") then $new_browser else . end)
+            ' > "$temp_file"
+
+            # Check if jq succeeded and restore the file
+            if [ $? -eq 0 ]; then
+                mv "$temp_file" "$modules_file"
+                echo "Updated Waybar modules.json with browser: $browser"
+            else
+                echo "Failed to update modules.json"
+                exit 1
+            fi
         else
-            echo "$modules_file not found"
+            echo "$modules_file not found!"
             exit 1
         fi
-
-        echo "Updated Waybar modules.json with browser: $browser"
     fi
 
 
