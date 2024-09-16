@@ -1,0 +1,12 @@
+/* -----------------------------------------------------
+ * Import Pywal colors 
+ * ----------------------------------------------------- */
+@import '../../../../.cache/wal/colors-waybar.css';
+
+@define-color backgroundColor rgba(0, 0, 0, 0.5);
+@define-color backgroundColorHover rgba(90, 90, 90, 0.5);
+@define-color green-color rgb(76, 173, 77);
+@define-color yellow-color rgb(164, 174, 72);
+@define-color red-color rgb(181, 47, 47);
+
+@import './main-style.css';

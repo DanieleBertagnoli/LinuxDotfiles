@@ -58,63 +58,17 @@
     "separate-outputs": true
   },
 
-  // Empty
-  "custom/empty": {
-    "format": ""
-  },
 
-  // Updates Count
-  "custom/updates": {
-    "format": "  {}",
-    "escape": true,
-    "return-type": "json",
-    "exec": "~/.config/dotfiles/scripts/updates.sh",
-    "restart-interval": 60,
-    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e ~/.config/dotfiles/scripts/install_updates.sh"
-  },
 
-  // Wallpaper
-  "custom/wallpaper": {
-    "format": "",
-    "on-click": "waypaper",
-    "tooltip-format": "Select a wallpaper"
-  },
-
-  // Waybar Themes
-  "custom/waybarthemes": {
-    "format": "",
-    "on-click": "~/.config/waybar/themeswitcher.sh",
-    "tooltip-format": "Select a waybar theme"
-  },
-
-  // Rofi Application Launcher
-  "custom/appmenu": {
-    // START APPS LABEL
-    "format": "Apps",
-    // END APPS LABEL
-    "on-click": "rofi -show drun -replace",
-    "tooltip-format": "Open the application launcher"
-  },
-
-  // Rofi Application Launcher
-  "custom/appmenuicon": {
-    "format": "",
-    "on-click": "rofi -show drun -replace",
-    "tooltip-format": "Open the application launcher"
-  },
+  // Modules
 
   // Power Menu
-  "custom/exit": {
+  "custom/power": {
     "format": "",
     "on-click": "wlogout",
     "tooltip-format": "Power Menu"
   },
 
-  // System tray
-  "tray": {
-    "icon-size": 21,
-    "spacing": 10
-  },
 
   // Clock
   "clock": {
@@ -123,71 +77,10 @@
     "format-alt": "{:%Y-%m-%d}"
   },
 
-  // CPU
-  "cpu": {
-    "format": " C {usage}% ",
-    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop"
-  },
-
-  // Memory
-  "memory": {
-    "format": " M {}%",
-    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop"
-  },
-
-  // Harddisc space used
-  "disk": {
-    "interval": 10,
-    "format": "D {percentage_used}% ",
-    "path": "/",
-    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop"
-  },
-
-  // Group Hardware
-  "group/hardware": {
-    "orientation": "horizontal",
-    "modules": ["disk", "cpu", "memory"]
-  },
-
-  // Group Links
-  "group/links": {
-    "orientation": "horizontal",
-    "modules": [ "custom/empty" ]
-  },
-
-  // Group Settings
-  "group/settings": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 300,
-      "children-class": "not-memory",
-      "transition-left-to-right": true
-    },
-    "modules": [
-      "custom/settings",
-      "custom/waybarthemes",
-      "custom/wallpaper"
-    ]
-  },
-
-  // Network
-  "network": {
-    "format": "{ifname}",
-    "format-wifi": "   {signalStrength}%",
-    "format-ethernet": "  {ifname}",
-    "format-disconnected": "Disconnected",
-    "tooltip-format": " {ifname} via {gwaddri}",
-    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
-    "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50,
-    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e nmtui"
-  },
 
   // Battery
   "battery": {
     "states": {
-      // "good": 95,
       "warning": 30,
       "critical": 15
     },
@@ -195,14 +88,91 @@
     "format-charging": "  {capacity}%",
     "format-plugged": "  {capacity}%",
     "format-alt": "{icon}  {time}",
-    // "format-good": "", // An empty format will hide the module
-    // "format-full": "",
     "format-icons": [" ", " ", " ", " ", " "]
   },
 
-  // Pulseaudio
+
+  // CPU
+  "cpu": {
+    "format": " {usage}%",
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop",
+    "states": {
+            "normal": 0,
+            "warning": 50,
+            "critical": 75
+        }
+  },
+
+
+  // Memory
+  "memory": {
+    "format": " {}%",
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop",
+    "states": {
+            "normal": 0,
+            "warning": 50,
+            "critical": 75
+        }
+  },
+
+
+  // Disk
+  "disk": {
+    "interval": 10,
+    "format": " {percentage_used}%",
+    "path": "/",
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop",
+    "states": {
+            "normal": 0,
+            "warning": 50,
+            "critical": 75
+        }
+  },
+
+
+  // Wallpaper
+  "custom/wallpaper": {
+    "format": "",
+    "on-click": "waypaper",
+    "tooltip-format": "Select a wallpaper"
+  },
+
+
+  // Rofi Application Launcher
+  "custom/rofi": {
+    "format": "Apps",
+    "on-click": "rofi -show drun -replace",
+    "tooltip-format": "Open the application launcher"
+  },
+
+
+  // Browsers
+  "custom/chromium": {
+    "format": "",
+    "on-click": "chromium",
+    "tooltip-format": "Open Chromium"
+  }, 
+  "custom/brave": {
+    "format": "",
+    "on-click": "brave",
+    "tooltip-format": "Open Brave"
+  }, 
+  "custom/firefox": {
+    "format": "",
+    "on-click": "firefox",
+    "tooltip-format": "Open Firefox"
+  },
+
+  // Filemanager
+  "custom/filemanager": {
+    "format": "",
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run filemanager",
+    "tooltip-format": "Open filemanager"
+  },
+
+
+  // Volume
   "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
     "format": "{icon}  {volume}%",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
@@ -221,26 +191,10 @@
     "on-click": "pavucontrol"
   },
 
-  // Bluetooth
-  "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "",
-    "format-off": "",
-    "interval": 30,
-    "on-click": "blueman-manager",
-    "format-no-controller": ""
-  },
 
-  // Other
-  "user": {
-    "format": "{user}",
-    "interval": 60,
-    "icon": false
-  },
-
-  // backlight:
+  // Display dimmer
   "backlight": {
-    "format": "{icon} {percent}%",
+    "format": "{icon}  {percent}%",
     "format-icons": [
       "",
       "",
@@ -261,37 +215,86 @@
     "scroll-step": 1
   },
 
-  // QUICK LINKS TODO
-
-  "custom/chromium": {
-    "format": "",
-    "on-click": "chromium",
-    "tooltip-format": "Open Chromium"
-  }, 
-  "custom/brave": {
-    "format": "",
-    "on-click": "brave",
-    "tooltip-format": "Open Brave"
-  }, 
-  "custom/firefox": {
-    "format": "",
-    "on-click": "firefox",
-    "tooltip-format": "Open Firefox"
+  // Bluetooth
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": " Disabled",
+    "format-off": " Off",
+    "interval": 30,
+    "on-click": "blueman-manager",
+    "format-no-controller": ""
   },
-  "custom/filemanager": {
-    "format": "",
-    "on-click": "~/.config/dotfiles/scripts/applications.sh run filemanager",
-    "tooltip-format": "Open filemanager"
+
+  // Network
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "   {signalStrength}%",
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "Disconnected",
+    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e nmtui"
   },
-  "custom/quicklinkempty": {
-  }, 
+
+  // Updates
+  "custom/updates": {
+    "format": "  {}",
+    "escape": true,
+    "return-type": "json",
+    "exec": "~/.config/dotfiles/scripts/updates.sh",
+    "restart-interval": 600,
+    "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e ~/.config/dotfiles/scripts/install_updates.sh"
+  },
 
 
-  "group/quicklinks": {
+  // Groups
+
+  // Power Group
+  "group/group-power": {
     "orientation": "horizontal",
     "modules": [
-        "custom/firefox",
-        "custom/filemanager"
+        "clock",
+        "battery",
+        "custom/power"
+    ]
+  },
+
+  
+  // Hardware Group
+  "group/group-hardware": {
+    "orientation": "horizontal",
+    "modules": [
+      "disk", 
+      "cpu", 
+      "memory"
+    ]
+  },
+
+
+  // Apps Group
+  "group/group-apps": {
+    "orientation": "horizontal",
+    "modules": [
+      "custom/rofi", 
+      "custom/wallpaper", 
+      "custom/brave",
+      "custom/filemanager"
+    ]
+  },
+
+
+  // System status Group
+  "group/group-system-status": {
+    "orientation": "horizontal",
+    "modules": [
+      "backlight",
+      "pulseaudio",
+      "bluetooth", 
+      "network",
+      "custom/updates"
     ]
   }
 }

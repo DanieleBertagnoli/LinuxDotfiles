@@ -12,6 +12,9 @@
 
 # This script is used to check whether there are updates available for AUR packages
 
+threshold_yellow=25
+threshold_red=100
+
 if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
     updates_arch=0
 fi
@@ -22,6 +25,15 @@ fi
 
 updates=$(("$updates_arch" + "$updates_aur"))
 
-# This print is used in the waybar module
-printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system"}' "$updates" "$updates" "$updates"
+css_class="green"
 
+if [ "$updates" -gt $threshold_yellow ]; then
+    css_class="yellow"
+fi
+
+if [ "$updates" -gt $threshold_red ]; then
+    css_class="red"
+fi
+
+# This print is used in the waybar module
+printf '{"text": "%s", "alt": "%s", "tooltip": "Click to update your system", "class":"%s"}' "$updates" "$updates" "$css_class"

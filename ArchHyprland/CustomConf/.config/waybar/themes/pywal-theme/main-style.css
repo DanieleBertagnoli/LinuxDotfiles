@@ -1,0 +1,226 @@
+/*
+ * By: Daniele Bertagnoli
+ *
+ * __        __          _                  ____  _         _       
+ * \ \      / /_ _ _   _| |__   __ _ _ __  / ___|| |_ _   _| | ___  
+ *  \ \ /\ / / _` | | | | '_ \ / _` | '__| \___ \| __| | | | |/ _ \ 
+ *   \ V  V / (_| | |_| | |_) | (_| | |     ___) | |_| |_| | |  __/ 
+ *    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    |____/ \__|\__, |_|\___| 
+ *                 |___/                              |___/         
+ *  
+ * ----------------------------------------------------- 
+*/
+
+
+/* -----------------------------------------------------
+ * General 
+ * ----------------------------------------------------- */
+
+ * {
+    font-family: "DejaVu Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    border: none;
+    border-radius: 0px;
+}
+
+window#waybar {
+    background-color: transparent;
+}
+
+/* Workspaces */
+#workspaces {
+    background: @backgroundColor;
+    margin: 10px 10px 0 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+}
+
+#workspaces button {
+    padding: 5px 10px;
+    margin: 5px ;
+    color: rgba(122, 122, 122, 0.5);
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+#workspaces button.active {
+    color: white;
+    background: @backgroundColorHover;
+}
+
+#workspaces button:hover {
+    color: whitesmoke;
+    background: @backgroundColorHover;
+    opacity:0.5;
+}
+
+/* -----------------------------------------------------
+ * Tooltips
+ * ----------------------------------------------------- */
+
+tooltip {
+    border-radius: 10px;
+    background-color: @backgroundlight;
+    opacity:0.8;
+    padding:20px;
+    margin:0px;
+}
+
+tooltip label {
+    color: @textcolor2;
+}
+
+/* -----------------------------------------------------
+ * Window
+ * ----------------------------------------------------- */
+
+#window {
+    background: @backgroundlight;
+    margin: 5px 15px 5px 0px;
+    padding: 2px 10px 0px 10px;
+    border-radius: 12px;
+    color:@textcolor2;
+    font-size:16px;
+    font-weight:normal;
+    opacity:0.8;
+}
+
+window#waybar.empty #window {
+    background-color:transparent;
+}
+
+/* -----------------------------------------------------
+ * Taskbar
+ * ----------------------------------------------------- */
+
+#taskbar {
+    background: @backgroundlight;
+    margin: 3px 15px 3px 0px;
+    padding:0px;
+    border-radius: 15px;
+    font-weight: normal;
+    font-style: normal;
+    opacity:0.8;
+    border: 3px solid @backgroundlight;
+}
+
+#taskbar button {
+    margin:0;
+    border-radius: 15px;
+    padding: 0px 5px 0px 5px;
+}
+
+#taskbar.empty {
+    background:transparent;
+    border:0;
+    padding:0;
+    margin:0;
+}
+
+
+
+
+
+
+
+
+
+/* Modules right and left*/
+#group-power, #group-hardware, #group-apps, #group-system-status{
+    border-radius: 10px;
+    margin: 10px 10px 0 10px;
+    background-color: @backgroundColor;
+    padding: 4px;
+}
+
+/* Modules Styling */
+#custom-power, 
+#battery, 
+#clock, 
+#disk, 
+#cpu, 
+#memory,
+#custom-firefox,
+#custom-chromium,
+#custom-brave,
+#custom-filemanager,
+#custom-wallpaper,
+#custom-rofi,
+#backlight,
+#pulseaudio,
+#bluetooth,
+#network,
+#custom-updates  {
+    padding: 5px 10px;
+    margin: 0 5px;
+    color: white;
+    font-size: 16px;
+}
+
+/* Icons Styling */
+#custom-power, 
+#custom-firefox,
+#custom-chromium,
+#custom-brave,
+#custom-filemanager,
+#custom-wallpaper {
+    font-size: 20px;
+}
+
+#custom-power:hover, 
+#battery:hover, 
+#clock:hover,
+#disk:hover,
+#cpu:hover,
+#memory:hover,
+#custom-firefox:hover,
+#custom-chromium:hover,
+#custom-brave:hover,
+#custom-filemanager:hover,
+#custom-wallpaper:hover,
+#custom-rofi:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#bluetooth:hover,
+#network:hover,
+#custom-updates:hover {
+    border-radius: 10px;
+    background-color: @backgroundColorHover;
+}
+
+/* Battery */
+@keyframes blink {
+    to {
+        color: white;
+    }
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* CPU, Memory and Disk */
+#cpu.normal, #memory.normal, #disk.normal {
+    color: @green-color;
+}
+#cpu.warning, #memory.warning, #disk.warning {
+    color: @yellow-color;
+}
+#cpu.critical, #memory.critical, #disk.critical {
+    color: @red-color;
+}
+
+/* Updates */
+#custom-updates.yellow {
+    color: @yellow-color;
+}
+
+#custom-updates.red {
+    color: @red-color;
+}
