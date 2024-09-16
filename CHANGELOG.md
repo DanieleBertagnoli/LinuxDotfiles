@@ -1,5 +1,12 @@
 # Changelogs
 
+## v1.2.0 (Not released yet)
+### New Features
+- Added a new waybar theme.
+
+### Bug Fixes
+- Fixes bugs in dotfiles scripts.
+
 ## v1.1.0 ✅
 This release is used to fix minor bugs and add some useful features. 
 
