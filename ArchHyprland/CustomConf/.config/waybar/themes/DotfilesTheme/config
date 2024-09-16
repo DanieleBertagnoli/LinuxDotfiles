@@ -22,7 +22,7 @@
 
     // Load Modules
     "include": [
-        "~/.config/waybar/themes/dotfile-theme/modules.json"
+        "~/.config/waybar/themes/DotfilesTheme/modules.json"
     ],
 
     // Modules Left
