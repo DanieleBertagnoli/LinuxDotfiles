@@ -1,4 +1,4 @@
-// By: Stephan Raabe
+// By: Daniele Bertagnoli
 
 // __          __ __     ______          _____     _____ ____  _   _ ______ 
 // \ \        / /\\ \   / /  _ \   /\   |  __ \   / ____/ __ \| \ | |  ____|
@@ -22,19 +22,13 @@
 
     // Load Modules
     "include": [
-        "~/.config/waybar/modules.json"
+        "~/.config/waybar/themes/dotfile-theme/modules.json"
     ],
 
     // Modules Left
     "modules-left": [
-        "custom/appmenu",
-        "group/settings",
-        "custom/wallpaper",
-        "custom/firefox",
-        "custom/filemanager",
-        "group/hardware",
-        "hyprland/window",
-        "custom/empty"
+        "group/group-apps",
+        "group/group-system-status",
     ],
 
     // Modules Center
@@ -44,13 +38,7 @@
 
     // Modules Right    
     "modules-right": [
-        "custom/updates",
-        "pulseaudio",
-        "backlight",
-        "bluetooth",
-        "battery", 
-        "network",
-        "custom/exit",
-        "clock"
+        "group/group-hardware",
+        "group/group-power"
     ]
 }
