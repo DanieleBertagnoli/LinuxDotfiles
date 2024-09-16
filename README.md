@@ -4,10 +4,11 @@ These are my personal dotfiles for quickly setting up my systems after a fresh i
 Feel free to open issues or contact me to discuss any bugs, problems, or potential improvements.
 
 ## Roadmap
-- [ ] Refactor Ubuntu dotfiles
-- [ ] Adapt Arch dotfiles to clean Arch installtions (up to now works only for EndevourOS)
+- [ ] ArchHyprland: Adapt Arch dotfiles to clean Arch installtions (up to now works only for EndevourOS)
 - [x] ArchHyprland: Add Bluetooth support and laptop configuration
-- [ ] Update Wiki
+- [ ] ArchHyprland: Add the pywal theme for waybar
+- [ ] Ubuntu: Update Ubuntu dotfiles wiki
+- [ ] Ubuntu: Refactor Ubuntu dotfiles
 
 ## Ubuntu dotfiles &nbsp; <img src="Images/ubuntu.png" width="30">
 These dotfiles are used to set up Ubuntu-GNOME systems (you can slightly modify some commands to adapt it to any Debian-based distribution). To run the setup, simply run the commands:
