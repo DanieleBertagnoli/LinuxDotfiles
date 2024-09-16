@@ -64,11 +64,10 @@ if [ "$action" == "set" ]; then
         echo "Added: $key=$value to $config_file"
     fi
 
-    # Update the waybar browser config
-    if [ $key == "browser" ]; then
+    if [ "$key" == "browser" ]; then
 
-        # Define file paths
-        waybar_config="$HOME/.config/waybar/themes/config"
+        # Define the path to the modules.json file
+        modules_file="$HOME/.config/waybar/modules.json"
 
         # Read the preferred browser from app_preferences.conf
         browser=$(grep -i 'browser=' "$config_file" | cut -d'=' -f2)
@@ -85,17 +84,27 @@ if [ "$action" == "set" ]; then
             echo "--enable-features=TouchpadOverscrollHistoryNavigation\n--ozone-platform=wayland" > "$HOME/.config/$browser-flags.conf"
         fi
 
-        # List of supported browsers in the waybar config
+        # List of supported browsers in the modules.json
         browsers=("custom/firefox" "custom/brave" "custom/chromium")
 
-        # Replace the old browser setting with the new one in the waybar config
-        for old_browser in "${browsers[@]}"; do
-            sed -i "s|$old_browser|custom/$browser|g" "$waybar_config"
-        done
+        # Ensure the modules.json file exists
+        if [ -f "$modules_file" ]; then
+            echo "Updating $modules_file..."
 
-        echo "updated waybar configuration with browser: $browser"
+            # Replace the old browser setting with the new one in the modules.json file
+            for old_browser in "${browsers[@]}"; do
+                sed -i "s|$old_browser|custom/$browser|g" "$modules_file"
+            done
+        else
+            echo "$modules_file not found"
+            exit 1
+        fi
 
+        echo "Updated Waybar modules.json with browser: $browser"
     fi
+
+
+    ~/.config/waybar/launch.sh
 
 elif [ "$action" == "run" ]; then
     # Check if the key exists in the config file
