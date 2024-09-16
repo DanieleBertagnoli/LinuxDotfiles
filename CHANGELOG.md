@@ -6,6 +6,7 @@
 
 ### Bug Fixes
 - Fixes bugs in dotfiles scripts.
+- Fixed the script to set the SDDM wallpaper
 
 ## v1.1.0 ✅
 This release is used to fix minor bugs and add some useful features. 

@@ -41,3 +41,8 @@ fi
 
 # Copy the wallpaper to the SDDM theme directory
 sudo cp "$current_wallpaper" /usr/share/sddm/themes/sugar-candy/Backgrounds/Background.png
+
+# Update the theme.conf file to use the new background
+sudo sed -i 's|^Background=.*|Background="Backgrounds/Background.png"|' /usr/share/sddm/themes/sugar-candy/theme.conf
+
+echo "Wallpaper successfully updated."
