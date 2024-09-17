@@ -2,7 +2,7 @@
 
 ## v1.2.0 (Not released yet)
 ### New Features
-- Added a new waybar theme.
+- Added a two new waybar themes and removed the old ones.
 
 ### Bug Fixes
 - Fixes bugs in dotfiles scripts.

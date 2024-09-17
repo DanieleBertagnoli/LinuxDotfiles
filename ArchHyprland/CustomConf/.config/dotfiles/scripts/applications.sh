@@ -41,11 +41,12 @@ if [[ ! "$key" =~ ^[a-zA-Z0-9_]+$ ]]; then
     exit 1
 fi
 
-# Check if the value is a valid command
-if ! command -v $value >/dev/null 2>&1; then
+# Check if the key is a valid command
+if ! command -v "$value" >/dev/null 2>&1 && [ "$action" == "set" ]; then
     echo "$value is not installed."
     exit 1
 fi
+
 
 
 # Ensure the config file exists, create it if not

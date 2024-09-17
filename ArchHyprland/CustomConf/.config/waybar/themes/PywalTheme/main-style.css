@@ -45,7 +45,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-    color: white;
+    color: @font-color;
     background: @background-color-hover;
 }
 
@@ -61,12 +61,12 @@ window#waybar {
 
 tooltip {
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.9);
-    padding:20px;
+    background-color: @background-color;
+    padding: 20px;
 }
 
 tooltip label {
-    color: white;
+    color: @font-color;
 }
 
 
@@ -102,7 +102,7 @@ tooltip label {
 #custom-updates  {
     padding: 5px 10px;
     margin: 0 5px;
-    color: white;
+    color: @font-color;
     font-size: 16px;
 }
 
@@ -140,7 +140,7 @@ tooltip label {
 /* Battery */
 @keyframes blink {
     to {
-        color: white;
+        color: @font-color;
     }
 }
 
@@ -149,7 +149,7 @@ tooltip label {
 }
 
 #battery.critical:not(.charging) {
-    color: @red-color;
+    color: @pure-red-color;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;

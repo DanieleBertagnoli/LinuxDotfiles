@@ -6,7 +6,7 @@ Feel free to open issues or contact me to discuss any bugs, problems, or potenti
 ## Roadmap
 - [ ] ArchHyprland: Adapt Arch dotfiles to clean Arch installtions (up to now works only for EndevourOS)
 - [x] ArchHyprland: Add Bluetooth support and laptop configuration
-- [ ] ArchHyprland: Add the pywal theme for waybar
+- [x] ArchHyprland: Add the pywal theme for waybar
 - [ ] Ubuntu: Update Ubuntu dotfiles wiki
 - [ ] Ubuntu: Refactor Ubuntu dotfiles
 

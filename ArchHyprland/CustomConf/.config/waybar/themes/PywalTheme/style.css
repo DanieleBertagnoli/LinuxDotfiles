@@ -1,0 +1,12 @@
+/* Import Pywal colors */
+@import '../../../../.cache/wal/colors-waybar.css';
+
+@define-color background-color alpha(@background, 0.7);
+@define-color font-color @color7;
+@define-color background-color-hover rgba(90, 90, 90, 0.5);
+@define-color green-color @color11;
+@define-color yellow-color @color12;
+@define-color red-color @color15;
+@define-color pure-red-color rgb(181, 47, 47);
+
+@import './main-style.css';
