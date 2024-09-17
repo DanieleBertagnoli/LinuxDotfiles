@@ -1,6 +1,6 @@
 # Changelogs
 
-## v1.2.0 (Not released yet)
+## v1.2.0 💡
 ### New Features
 - Added a two new waybar themes and removed the old ones.
 
