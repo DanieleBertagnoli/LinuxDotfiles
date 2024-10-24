@@ -9,6 +9,7 @@ Feel free to open issues or contact me to discuss any bugs, problems, or potenti
 - [x] ArchHyprland: Add the pywal theme for waybar
 - [ ] Ubuntu: Update Ubuntu dotfiles wiki
 - [ ] Ubuntu: Refactor Ubuntu dotfiles
+- [x] RHEL: Add installation file
 
 ## Ubuntu dotfiles &nbsp; <img src="Images/ubuntu.png" width="30">
 These dotfiles are used to set up Ubuntu-GNOME systems (you can slightly modify some commands to adapt it to any Debian-based distribution). To run the setup, simply run the commands:
@@ -54,6 +55,18 @@ cd LinuxDotfiles/ArchHyprland
 
 For all the settings and customizations, follow the Wiki.
 
+## RedHat Enterprise &nbsp; <img src="Images/redhat.png" width="40">
+
+These dotfiles provides a very light configuration for RHEL. To install them, run the following commands:
+
+```ssh
+# Clone the repository
+git clone https://github.com/DanieleBertagnoli/LinuxDotfiles
+cd LinuxDotfiles/RedHat
+
+# Run the script
+./install.sh
+```
 
 ## Issues 🚨
 Feel free to contact me or open a public issue. Help me improve the project!
