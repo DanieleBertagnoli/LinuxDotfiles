@@ -11,6 +11,9 @@ sudo yum install papirus-icon-theme.noarch
 # Installing breeze cursor
 sudo yum install breeze-cursor-theme.noarch
 
+# Installing eza
+sudo yum install eza
+
 # Installing Starship
 curl -sS https://starship.rs/install.sh | sh
 cp -r ./CustomConf/.configs/* ~/.configs
