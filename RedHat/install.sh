@@ -5,6 +5,8 @@ cd $(dirname $0)
 #Installing font
 cd ~/.local/share/fonts && curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
 
+cd $(dirname $0)
+
 # Installing Icon theme
 sudo yum install papirus-icon-theme.noarch
 
