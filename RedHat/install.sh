@@ -45,9 +45,6 @@ sudo yum install breeze-cursor-theme.noarch
 # Installing eza
 sudo yum install eza
 
-ls
-echo $(pwd)
-
 # Installing Starship
 curl -sS https://starship.rs/install.sh | sh
 cp -r ./CustomConf/.configs/* ~/.configs
