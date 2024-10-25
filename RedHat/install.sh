@@ -47,7 +47,7 @@ sudo yum install eza
 
 # Installing Starship
 curl -sS https://starship.rs/install.sh | sh
-cp -r ./CustomConf/.configs/* ~/.configs
+cp -r ./CustomConf/.config/* ~/.config
 
 # Copying .bashrc configurations
 cp -r ./CustomConf/.bash* ~/
