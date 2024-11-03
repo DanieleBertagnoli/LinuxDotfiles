@@ -35,6 +35,7 @@ sudo pacman -Syu
 
 install gum yay
 install figlet yay
+install pacman wget
 
 clear
 
@@ -88,6 +89,7 @@ pacman_packages=(
     pinta
     wireplumber
     pipewire
+    xdg-desktop-portal-hyprland
 )
 
 # Packages to be installed using yay
@@ -102,7 +104,6 @@ yay_packages=(
     bun-bin
     grimblast
     qiv
-    xdg-desktop-portal-hyprland-git
 )
 
 for package in "${pacman_packages[@]}"; do
