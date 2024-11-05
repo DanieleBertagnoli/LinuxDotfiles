@@ -72,3 +72,4 @@ while true; do
     set_random_wallpaper
 
 done
+ 
