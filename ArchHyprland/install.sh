@@ -291,6 +291,7 @@ answer=$(gum choose "Yes" "No")
 echo -e "\n\nSetting environment variables"
 if [ "$answer" == "Yes" ]; then
     cat ~/.config/hypr/configs/environments/nvidia.conf > ~/.config/hypr/configs/environment_vars.conf 
+    sudo pacman -Sy libva-nvidia-driver
 else
     cat ~/.config/hypr/configs/environments/default.conf > ~/.config/hypr/configs/environment_vars.conf
 fi
