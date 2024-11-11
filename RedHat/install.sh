@@ -52,6 +52,12 @@ cp -r ./CustomConf/.config/* ~/.config
 # Copying .bashrc configurations
 cp -r ./CustomConf/.bash* ~/
 
+# Copying the random wallpaper script
+mkdir ~/Documents/Scripts
+cp ./random_wallpaper.sh ~/Documents/Scripts
+
+cp -r ./Wallpapers ~/Pictures/
+
 # Apply themes
 gsettings set org.gnome.desktop.interface cursor-theme 'breeze_cursors'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
