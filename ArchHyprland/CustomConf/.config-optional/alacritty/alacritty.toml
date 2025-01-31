@@ -14,7 +14,7 @@
 size = 12
 
 [font.normal]
-family = "DejaVu Sans Mono"
+family = "Noto Sans Mono"
 style = "Regular"
 
 [window]
