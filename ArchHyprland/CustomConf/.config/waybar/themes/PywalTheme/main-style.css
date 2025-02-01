@@ -104,6 +104,7 @@ tooltip label {
     margin: 0 5px;
     color: @font-color;
     font-size: 16px;
+    background-color: transparent;
 }
 
 /* Icons Styling */
