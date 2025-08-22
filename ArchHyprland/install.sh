@@ -70,6 +70,7 @@ pacman_packages=(
     eza
     ttf-font-awesome
     ttf-nerd-fonts-symbols
+    archlinux-keyring
     breeze
     qt6ct
     gtk4
