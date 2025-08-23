@@ -21,9 +21,8 @@ cd $(dirname $0)
 
 sudo pacman -Syu
 
-install gum yay
-install figlet yay
-install pacman wget
+yay -S --noconfirm gum figlet
+sudo pacman -S --noconfirm wget
 
 clear
 
