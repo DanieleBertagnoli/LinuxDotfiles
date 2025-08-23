@@ -68,8 +68,7 @@ pacman_packages=(
     python-pywal
     hyprlock
     eza
-    ttf-font-awesome
-    ttf-nerd-fonts-symbols
+    otf-font-awesome
     archlinux-keyring
     breeze
     qt6ct
@@ -86,7 +85,6 @@ pacman_packages=(
     slurp
     cliphist
     vlc
-    pinta
     wireplumber
     pipewire
     xdg-desktop-portal-hyprland
@@ -132,6 +130,7 @@ pictures_folder=$(xdg-user-dir PICTURES)
 cp -r ./CustomConf/.config/* ~/.config
 cp ./CustomConf/.bashrc ~/.bashrc
 cp -r Wallpapers/ $pictures_folder
+sudo cp -r GTKThemes/* /usr/share/themes
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
