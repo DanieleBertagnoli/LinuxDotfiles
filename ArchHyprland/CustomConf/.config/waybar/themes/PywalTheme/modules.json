@@ -1,17 +1,4 @@
-// By: Stephan Raabe
-
-// __          __ __     ______          _____    __  __  ____  _____  _    _ _      ______  _____ 
-// \ \        / /\\ \   / /  _ \   /\   |  __ \  |  \/  |/ __ \|  __ \| |  | | |    |  ____|/ ____|
-//  \ \  /\  / /  \\ \_/ /| |_) | /  \  | |__) | | \  / | |  | | |  | | |  | | |    | |__  | (___  
-//   \ \/  \/ / /\ \\   / |  _ < / /\ \ |  _  /  | |\/| | |  | | |  | | |  | | |    |  __|  \___ \ 
-//    \  /\  / ____ \| |  | |_) / ____ \| | \ \  | |  | | |__| | |__| | |__| | |____| |____ ____) |
-//     \/  \/_/    \_\_|  |____/_/    \_\_|  \_\ |_|  |_|\____/|_____/ \____/|______|______|_____/ 
-// 
-
-// This file contains all the modules that will be loaded in the config file
-
 {
-  // Workspaces
   "hyprland/workspaces": {
     "on-scroll-up": "hyprctl dispatch workspace r-1",
     "on-scroll-down": "hyprctl dispatch workspace r+1",
@@ -25,18 +12,19 @@
       "default": ""
     },
     "persistent-workspaces": {
-            "*": 5
+      "*": 5
     }
   },
-
-  // Taskbar
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 18,
     "tooltip-format": "{title}",
     "on-click": "activate",
     "on-click-middle": "close",
-    "ignore-list": ["Alacritty", "kitty"],
+    "ignore-list": [
+      "Alacritty",
+      "kitty"
+    ],
     "app_ids-mapping": {
       "firefoxdeveloperedition": "firefox-developer-edition"
     },
@@ -45,8 +33,6 @@
       "Foot Server": "Terminal"
     }
   },
-
-  // Hyprland Window
   "hyprland/window": {
     "rewrite": {
       "(.*) - Brave": "$1",
@@ -57,142 +43,115 @@
     },
     "separate-outputs": true
   },
-
-
-
-  // Modules
-
-  // Power Menu
   "custom/power": {
     "format": "",
     "on-click": "wlogout",
     "tooltip-format": "Power Menu"
   },
-
-
-  // Clock
   "clock": {
     "format": "{:%H:%M %a}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}"
   },
-
-
-  // Battery
   "battery": {
     "states": {
       "warning": 35,
       "critical": 20
     },
-    "format": "{icon} {capacity}%",
-    "format-charging": "  {capacity}%",
+    "format": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
     "format-plugged": "  {capacity}%",
     "format-alt": "{icon}  {time}",
-    "format-icons": [" ", " ", " ", " ", " "]
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
-
-
-  // CPU
   "cpu": {
     "format": " {usage}%",
     "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop",
     "states": {
-            "normal": 0,
-            "warning": 50,
-            "critical": 75
-        }
+      "normal": 0,
+      "warning": 50,
+      "critical": 75
+    }
   },
-
-
-  // Memory
   "memory": {
-    "format": " {}%",
+    "format": " {}%",
     "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop",
     "states": {
-            "normal": 0,
-            "warning": 50,
-            "critical": 75
-        }
+      "normal": 0,
+      "warning": 50,
+      "critical": 75
+    }
   },
-
-
-  // Disk
   "disk": {
     "interval": 10,
     "format": " {percentage_used}%",
     "path": "/",
     "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e htop",
     "states": {
-            "normal": 0,
-            "warning": 50,
-            "critical": 75
-        }
+      "normal": 0,
+      "warning": 50,
+      "critical": 75
+    }
   },
-
-
-  // Wallpaper
   "custom/wallpaper": {
     "format": "",
     "on-click": "waypaper",
     "tooltip-format": "Select a wallpaper"
   },
-
-
-  // Rofi Application Launcher
   "custom/rofi": {
     "format": "Apps",
     "on-click": "rofi -show drun -replace",
     "tooltip-format": "Open the application launcher"
   },
-
-
-  // Browsers
   "custom/chromium": {
     "format": "",
     "on-click": "chromium",
     "tooltip-format": "Open Chromium"
-  }, 
+  },
   "custom/brave": {
     "format": "",
     "on-click": "brave",
     "tooltip-format": "Open Brave"
-  }, 
+  },
   "custom/firefox": {
     "format": "",
     "on-click": "firefox",
     "tooltip-format": "Open Firefox"
   },
-
-  // Filemanager
   "custom/filemanager": {
     "format": "",
     "on-click": "~/.config/dotfiles/scripts/applications.sh run filemanager",
     "tooltip-format": "Open filemanager"
   },
-
-
-  // Volume
   "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-bluetooth": "{icon}  {volume}% {format_source}",
+    "format-bluetooth-muted": "  {format_source}",
+    "format-source": " {volume}%",
     "format-source-muted": "",
     "format-icons": {
-      "headphone": " ",
-      "hands-free": " ",
-      "headset": " ",
-      "phone": " ",
-      "portable": " ",
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
       "car": " ",
-      "default": ["", "", ""]
+      "default": [
+        "",
+        "",
+        ""
+      ]
     },
+    "scroll-step": 1,
     "on-click": "pavucontrol"
   },
-
-
-  // Display dimmer
   "backlight": {
     "format": "{icon}  {percent}%",
     "format-icons": [
@@ -214,85 +173,65 @@
     ],
     "scroll-step": 1
   },
-
-  // Bluetooth
   "bluetooth": {
-    "format": " {status}",
-    "format-disabled": " Disabled",
+    "format-on": " On",
+    "format-disabled": " Off",
     "format-off": " Off",
     "interval": 30,
     "on-click": "blueman-manager",
     "format-no-controller": ""
   },
-
-  // Network
   "network": {
     "format": "{ifname}",
-    "format-wifi": "   {signalStrength}%",
-    "format-ethernet": "  {ifname}",
+    "format-wifi": " {signalStrength}%",
+    "format-ethernet": "󰈀 {ifname}",
     "format-disconnected": "Disconnected",
-    "tooltip-format": " {ifname} via {gwaddri}",
+    "tooltip-format": "󰈀 {ifname} via {gwaddri}",
     "tooltip-format-wifi": "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
-    "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+    "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
     "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e nmtui"
   },
-
-  // Updates
   "custom/updates": {
-    "format": "  {}",
+    "format": " {}",
     "escape": true,
     "return-type": "json",
     "exec": "~/.config/dotfiles/scripts/updates.sh",
-    "restart-interval": 5,
+    "restart-interval": 3600,
     "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e ~/.config/dotfiles/scripts/install_updates.sh"
   },
-
-
-  // Groups
-
-  // Power Group
   "group/group-power": {
     "orientation": "horizontal",
     "modules": [
-        "clock",
-        "battery",
-        "custom/power"
+      "clock",
+      "battery",
+      "custom/power"
     ]
   },
-
-  
-  // Hardware Group
   "group/group-hardware": {
     "orientation": "horizontal",
     "modules": [
-      "disk", 
-      "cpu", 
+      "disk",
+      "cpu",
       "memory"
     ]
   },
-
-
-  // Apps Group
   "group/group-apps": {
     "orientation": "horizontal",
     "modules": [
-      "custom/rofi", 
-      "custom/wallpaper", 
-      "custom/brave",
+      "custom/rofi",
+      "custom/wallpaper",
+      "custom/chromium",
       "custom/filemanager"
     ]
   },
-
-
-  // System status Group
   "group/group-system-status": {
     "orientation": "horizontal",
     "modules": [
       "backlight",
       "pulseaudio",
-      "bluetooth", 
+      "bluetooth",
       "network",
       "custom/updates"
     ]
