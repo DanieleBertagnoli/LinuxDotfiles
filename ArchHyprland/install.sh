@@ -56,6 +56,7 @@ pacman_packages=(
     hyprlock
     eza
     otf-font-awesome
+    ttf-nerd-fonts-symbols
     archlinux-keyring
     breeze
     qt6ct
