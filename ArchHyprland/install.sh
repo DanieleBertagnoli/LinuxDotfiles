@@ -75,6 +75,7 @@ pacman_packages=(
     wireplumber
     pipewire
     xdg-desktop-portal-hyprland
+    jq
 )
 
 # Packages to be installed using yay
