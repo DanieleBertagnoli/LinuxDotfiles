@@ -10,18 +10,6 @@
 # |_____/|______|  |_|   \____/|_|      |_____/ \_____|_|  \_\_____|_|      |_|   
 #
 
-# Function to install a package using the appropriate command
-install() {
-    package=$1
-    install_cmd=$2
-
-    if [ "$install_cmd" == "pacman" ]; then
-        install_cmd="sudo $install_cmd"
-    fi
-
-    $install_cmd -S --noconfirm $package
-}
-
 cd $(dirname $0)
 
 
@@ -104,13 +92,12 @@ yay_packages=(
     qiv
 )
 
-for package in "${pacman_packages[@]}"; do
-    install $package "pacman"
-done
+# Install all pacman packages at once
+sudo pacman -S --noconfirm "${pacman_packages[@]}"
 
-for package in "${yay_packages[@]}"; do
-    install $package "yay"
-done
+# Install all yay packages at once
+sudo yay -S --noconfirm "${yay_packages[@]}"
+
 
 echo -e "\n\nPress [ENTER] to continue..."
 read
