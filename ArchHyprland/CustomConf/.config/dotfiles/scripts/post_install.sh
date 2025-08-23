@@ -33,4 +33,5 @@ waypaper --random
  
 rm ~/.config/dotfiles/cache/do_post_install
 
-
+sleep 10
+reboot
