@@ -136,23 +136,18 @@ echo -e "\n\nPick your terminal emulator"
 answer=$(gum choose "Alacritty" "Kitty" "ZSH")
 if [ $answer == "Alacritty" ]; then
     answer="alacritty"
-    from="pacman"
     cp -r ./CustomConf/.config-optional/alacritty ~/.config
 
 elif [ $answer == "Kitty" ]; then
     answer="kitty"
-    from="pacman"
-
 elif [ $answer == "ZSH" ]; then
     answer="zsh"
-    from="pacman"
-    
 else
     echo -e "\n\nERROR OPTION $answer NOT VALID"
     exit 1
 fi
 
-install $answer $from
+sudo pacman -S --noconfirm $answer
 
 ~/.config/dotfiles/scripts/applications.sh "set" "terminal" $answer 
 
@@ -161,7 +156,7 @@ echo -e "\n\nPick your browser"
 answer=$(gum choose "Firefox" "Brave" "Chromium")
 if [ $answer == "Firefox" ]; then
     answer="firefox"
-    from="pacman"
+    from="sudopacman"
 
 elif [ $answer == "Brave" ]; then
     answer="brave"
@@ -178,7 +173,7 @@ else
     exit 1
 fi
 
-install $answer $from
+$from -S --noconfirm $answer
 
 ~/.config/dotfiles/scripts/applications.sh "set" "browser" $answer 
 
@@ -187,18 +182,14 @@ echo -e "\n\nPick your browser"
 answer=$(gum choose "Nautilus" "Dolphin")
 if [ $answer == "Nautilus" ]; then
     answer="nautilus"
-    from="pacman"
-
 elif [ $answer == "Dolphin" ]; then
     answer="dolphin"
-    from="pacman"
-
 else
     echo -e "\n\nERROR OPTION $answer NOT VALID"
     exit 1
 fi
 
-install $answer $from
+sudo pacman -S --noconfirm $answer
 
 ~/.config/dotfiles/scripts/applications.sh "set" "filemanager" $answer 
 
@@ -222,7 +213,7 @@ answer=$(gum choose "Yes" "No")
 if [ "$answer" == "Yes" ]; then
 
     # Install sddm
-    install "sddm" "pacman"
+    sudo pacman -S --noconfirm sddm
 
     # Copy configuration files
     cp -r ./CustomConf/.config-optional/sddm ~/.config/
@@ -299,9 +290,7 @@ echo -e "\n\nDo you have a bluetooth adapter?"
 answer=$(gum choose "Yes" "No")
 if [ "$answer" == "Yes" ]; then
     echo -e "\n\nInstalling bluetooth modules"
-    install bluez pacman
-    install bluez-utils pacman
-    install blueman pacman 
+    sudo pacman -S --noconfirm bluez bluez-utils blueman
     sudo systemctl enable bluetooth.service
 fi
 
@@ -395,13 +384,13 @@ if gum confirm "Do you want to download some programs (Visual studio, Discord, e
         echo "Installing $package..."
         case "$package" in
             "Visual Studio Code")
-                install visual-studio-code-bin yay
+                yay -S --noconfirm visual-studio-code-bin
                 ;;
             "Bitwarden")
-                install bitwarden yay
+                yay -S --noconfirm bitwarden
                 ;;
             "Vesktop (Discord for Wayland)")
-                install vesktop yay
+                yay -S --noconfirm vesktop
                 ;;
         esac
     done
