@@ -198,7 +198,7 @@
     "escape": true,
     "return-type": "json",
     "exec": "~/.config/dotfiles/scripts/updates.sh",
-    "restart-interval": 3600,
+    "interval": 3600,
     "on-click": "~/.config/dotfiles/scripts/applications.sh run terminal --class dotfiles-floating -e ~/.config/dotfiles/scripts/install_updates.sh"
   },
   "group/group-power": {
