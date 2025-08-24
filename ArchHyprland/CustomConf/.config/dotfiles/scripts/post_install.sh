@@ -30,6 +30,37 @@ $pictures_folder=$(xdg-user-dir PICTURES)
 
 # Set random wallpaper
 waypaper --random
+
+# Number of workspaces you want to distribute
+TOTAL_WS=9
+
+# Get a list of connected monitors from hyprctl
+MONITORS=($(hyprctl monitors -j | jq -r '.[].name'))
+NUM_MON=${#MONITORS[@]}
+
+if [[ $NUM_MON -eq 0 ]]; then
+    echo "No monitors detected!"
+    exit 1
+fi
+
+# Workspaces per monitor (rounded up)
+WS_PER_MON=$(( (TOTAL_WS + NUM_MON - 1) / NUM_MON ))
+
+# Clear previous workspace assignments (optional)
+echo "# Auto-generated workspace config" >> ~/.config/hypr/configs/workspaces.conf
+
+ws=1
+for mon in "${MONITORS[@]}"; do
+    for ((i=0; i<$WS_PER_MON && $ws<=$TOTAL_WS; i++)); do
+        # First workspace on the first monitor is default
+        if [[ $ws -eq 1 ]]; then
+            echo "workspace = $ws, default:true, monitor:$mon" >> ~/.config/hypr/configs/workspaces.conf
+        else
+            echo "workspace = $ws, monitor:$mon" >> ~/.config/hypr/configs/workspaces.conf
+        fi
+        ((ws++))
+    done
+done
  
 rm ~/.config/dotfiles/cache/do_post_install
 
