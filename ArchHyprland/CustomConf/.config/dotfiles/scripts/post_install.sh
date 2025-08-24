@@ -54,9 +54,9 @@ for mon in "${MONITORS[@]}"; do
     for ((i=0; i<$WS_PER_MON && $ws<=$TOTAL_WS; i++)); do
         # First workspace on the first monitor is default
         if [[ $ws -eq 1 ]]; then
-            echo "workspace = $ws, default:true, monitor:$mon" >> ~/.config/hypr/configs/workspaces.conf
+            echo "workspace = $ws, persistent:true, default:true, monitor:$mon" >> ~/.config/hypr/configs/workspaces.conf
         else
-            echo "workspace = $ws, monitor:$mon" >> ~/.config/hypr/configs/workspaces.conf
+            echo "workspace = $ws, persistent:true, monitor:$mon" >> ~/.config/hypr/configs/workspaces.conf
         fi
         ((ws++))
     done
