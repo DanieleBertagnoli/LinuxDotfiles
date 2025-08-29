@@ -77,6 +77,7 @@ pacman_packages=(
     pipewire
     xdg-desktop-portal-hyprland
     jq
+    htop
 )
 
 # Packages to be installed using yay
