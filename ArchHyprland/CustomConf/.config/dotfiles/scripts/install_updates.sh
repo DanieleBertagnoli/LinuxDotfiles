@@ -53,8 +53,11 @@ if [[ $(is_installed "flatpak") == "0" ]] ;then
     flatpak upgrade
 fi
 
+# Run the pacman updates
+sudo pacman -Su --noconfirm
+
 # Run the AUR updates 
-yay
+yay --noconfirm
 
 notify-send "Update complete"
 
