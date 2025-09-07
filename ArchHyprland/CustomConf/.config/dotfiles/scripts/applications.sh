@@ -14,9 +14,10 @@
 
 # Function to display usage
 usage() {
-    echo "Usage: $0 <set|run> <key> [value]"
+    echo "Usage: $0 <set|get|run> <key> [value]"
     echo "Examples:"
     echo "  $0 set browser brave"
+    echo "  $0 get browser"
     echo "  $0 run browser"
     exit 1
 }
@@ -123,6 +124,16 @@ if [ "$action" == "set" ]; then
 
 
     ~/.config/waybar/launch.sh
+
+elif [ "$action" == "get" ]; then
+    # Return the value for the specified key
+    if grep -q "^$key=" "$config_file"; then
+        value=$(grep "^$key=" "$config_file" | cut -d'=' -f2-)
+        echo "$value"
+    else
+        echo "Error: Key '$key' not found in $config_file."
+        exit 1
+    fi
 
 elif [ "$action" == "run" ]; then
     # Check if the key exists in the config file

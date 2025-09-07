@@ -121,6 +121,8 @@ cp ./CustomConf/.bashrc ~/.bashrc
 cp -r Wallpapers/ $pictures_folder
 sudo cp -r GTKThemes/* /usr/share/themes
 
+printf "file://$HOME/Desktop\nfile://$HOME/Documents\nfile://$HOME/Downloads\nfile://$HOME/Music\nfile://$HOME/Pictures\nfile://$HOME/Videos\n" > ~/.config/gtk-3.0/bookmarks
+
 echo -e "\n\nPress [ENTER] to continue..."
 read
 clear
@@ -193,6 +195,12 @@ else
 fi
 
 sudo pacman -S --noconfirm $answer
+
+if [ $answer == "Nautilus" ]; then
+    sudo glib-compile-schemas /usr/share/glib-2.0/schemas
+    terminal=$(~/.config/dotfiles/scripts/applications.sh "get" "terminal")
+    gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
+fi
 
 ~/.config/dotfiles/scripts/applications.sh "set" "filemanager" $answer 
 
