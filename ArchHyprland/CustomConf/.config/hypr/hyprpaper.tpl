@@ -1,8 +1,7 @@
-# Preload Wallpapers
-preload = WALLPAPER
+wallpaper {
+    monitor = MONITOR
+    path = WALLPAPER
+    fit_mode = cover
+}
 
-# Set Wallpapers
-wallpaper = ,WALLPAPER
-
-# Disable Splash
 splash = false

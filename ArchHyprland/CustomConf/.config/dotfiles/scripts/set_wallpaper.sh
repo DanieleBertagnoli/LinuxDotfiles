@@ -42,9 +42,36 @@ source $HOME/.cache/wal/colors.sh
 # Restart hyprpaper
 killall -e hyprpaper & 
 sleep 1; 
-wal_tpl=$(cat ~/.config/hypr/hyprpaper.tpl)
-output=${wal_tpl//WALLPAPER/$wallpaper}
-echo "$output" > ~/.config/hypr/hyprpaper.conf
+
+
+tpl="$HOME/.config/hypr/hyprpaper.tpl"
+conf="$HOME/.config/hypr/hyprpaper.conf"
+
+# Extract monitor names from hyprctl
+monitors=$(hyprctl monitors | awk '/Monitor/ {print $2}')
+
+# Read template
+tpl_content=$(cat "$tpl")
+
+# Separate wallpaper block and splash line
+wallpaper_block=$(echo "$tpl_content" | sed '/splash = false/,$d')
+splash_line=$(echo "$tpl_content" | sed -n '/splash = false/p')
+
+# Build output
+output=""
+
+for monitor in $monitors; do
+    block="$wallpaper_block"
+    block="${block//MONITOR/$monitor}"
+    block="${block//WALLPAPER/$wallpaper}"
+    output+="$block"$'\n'
+done
+
+# Append splash line once
+output+="$splash_line"$'\n'
+
+# Write final config
+echo "$output" > "$conf"
 hyprpaper & > /dev/null 2>&1
 
 # Reload ags
