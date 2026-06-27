@@ -26,7 +26,7 @@ echo "$hyprctl_output" | awk '
     print "\n\nmonitor=" monitor_name ",preferred,auto,1"
 }' >> ~/.config/hypr/configs/monitors.conf
 
-$pictures_folder=$(xdg-user-dir PICTURES)
+pictures_folder=$(xdg-user-dir PICTURES)
 
 # Set random wallpaper
 waypaper --random
@@ -56,7 +56,7 @@ for mon in "${MONITORS[@]}"; do
         if [[ $ws -eq 1 ]]; then
             echo "workspace = $ws, default:true, monitor:$mon, persistent:true" >> ~/.config/hypr/configs/workspaces.conf
         else
-            echo "workspace = $ws, monitor:$mon" >> ~/.config/hypr/configs/workspaces.conf
+            echo "workspace = $ws, monitor:$mon, persistent:true" >> ~/.config/hypr/configs/workspaces.conf
         fi
         ((ws++))
     done
