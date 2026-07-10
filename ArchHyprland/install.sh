@@ -73,6 +73,7 @@ pacman_packages=(
     slurp
     cliphist
     vlc
+    bun
     wireplumber
     pipewire
     xdg-desktop-portal-hyprland
@@ -89,7 +90,6 @@ yay_packages=(
     trizen
     grub-btrfs
     aylurs-gtk-shell
-    bun-bin
     grimblast
     qiv
 )
@@ -197,6 +197,7 @@ fi
 sudo pacman -S --noconfirm $answer
 
 if [ $answer == "Nautilus" ]; then
+    yay -S --noconfirm nautilus-open-any-terminal
     sudo glib-compile-schemas /usr/share/glib-2.0/schemas
     terminal=$(~/.config/dotfiles/scripts/applications.sh "get" "terminal")
     gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal alacritty
