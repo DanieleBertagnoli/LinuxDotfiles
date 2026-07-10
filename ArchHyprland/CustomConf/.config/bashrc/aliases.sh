@@ -13,10 +13,10 @@
 # This script defines the bash aliases
 
 alias c='clear'
-alias ls='eza -a --icons'
-alias ll='eza -al --icons'
-alias l='eza --icons'
-alias lt='eza -a --tree --level=1 --icons'
+alias ls='eza --icons -a'
+alias ll='eza --icons -al'
+alias l='eza --icons=always'
+alias lt='eza -a --icons --tree --level=3'
 alias shutdown='systemctl poweroff'
 alias ts='~/.config/ml4w/scripts/snapshot.sh'
 alias wifi='nmtui'
@@ -25,3 +25,5 @@ alias autoclean='sudo pacman -Rcns $(pacman -Qdtq)'
 alias set_sddm_wallpaper='~/.config/dotfiles/scripts/set_sddm_wallpaper.sh'
 
 alias dw='cd ~/Downloads'
+
+alias rasp_connect='ssh -p 700 pi@192.168.1.168'
