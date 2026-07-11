@@ -64,7 +64,7 @@ pacman_packages=(
     gtk4
     gtk3
     nwg-look
-    dunst
+    swaync
     fastfetch
     brightnessctl
     qt5-graphicaleffects 

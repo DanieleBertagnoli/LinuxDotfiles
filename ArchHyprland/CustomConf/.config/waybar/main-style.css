@@ -62,11 +62,12 @@ window#waybar {
 tooltip {
     border-radius: 10px;
     background-color: @background-color;
-    padding: 20px;
+    padding: 10px;
 }
 
 tooltip label {
     color: @font-color;
+    padding: 10px;
 }
 
 
@@ -95,6 +96,7 @@ tooltip label {
 #custom-filemanager,
 #custom-wallpaper,
 #custom-rofi,
+#custom-notification,
 #backlight,
 #pulseaudio,
 #bluetooth,
@@ -113,6 +115,7 @@ tooltip label {
 #custom-chromium,
 #custom-brave,
 #custom-filemanager,
+#custom-notification,
 #custom-wallpaper {
     font-size: 20px;
 }
@@ -133,6 +136,7 @@ tooltip label {
 #pulseaudio:hover,
 #bluetooth:hover,
 #network:hover,
+#custom-notification:hover,
 #custom-updates:hover {
     border-radius: 10px;
     background-color: @background-color-hover;

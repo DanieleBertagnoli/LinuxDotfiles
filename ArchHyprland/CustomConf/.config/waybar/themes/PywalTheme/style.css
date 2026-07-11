@@ -9,4 +9,4 @@
 @define-color red-color @color15;
 @define-color pure-red-color rgb(181, 47, 47);
 
-@import './main-style.css';
+@import '../../main-style.css';

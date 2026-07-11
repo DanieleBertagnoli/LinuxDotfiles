@@ -17,7 +17,7 @@ killall waybar
 pkill waybar
 sleep 0.5
 
-config_file="$HOME/.config/waybar/themes/PywalTheme/config"
+config_file="$HOME/.config/waybar/config"
 style_file="$HOME/.config/waybar/themes/PywalTheme/style.css"
 
 # Start new waybar instance

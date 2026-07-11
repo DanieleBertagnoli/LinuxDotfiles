@@ -22,7 +22,7 @@
 
     // Load Modules
     "include": [
-        "~/.config/waybar/themes/PywalTheme/modules.json"
+        "~/.config/waybar/modules.json"
     ],
 
     // Modules Left

@@ -126,6 +126,29 @@
     "on-click": "~/.config/dotfiles/scripts/applications.sh run filemanager",
     "tooltip-format": "Open filemanager"
   },
+  
+  "custom/notification": {
+    "tooltip": true,
+    "format": "<span size='16pt'>{icon}</span>",
+    "tooltip-format": "Notification center",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "",
@@ -201,6 +224,7 @@
   "group/group-power": {
     "orientation": "horizontal",
     "modules": [
+      "custom/notification",
       "clock",
       "battery",
       "custom/power"

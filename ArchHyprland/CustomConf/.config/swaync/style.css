@@ -1,0 +1,47 @@
+@import url("../../.cache/wal/colors.css");
+
+* {
+    font-family: "DejaVu Sans";
+}
+
+.control-center .notification-group {
+    background-color: transparent;
+}
+
+
+.notification {
+    background-color: alpha(var(--background), 0.9);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.notification-content {
+    background-color: transparent;
+}
+
+.notification:hover {
+    background-color: alpha(var(--background), 1);
+}
+
+.control-center {
+    background-color: alpha(var(--background), 0.8);
+    border-radius: 12px;
+    border: 2px solid alpha(var(--background), 0.5);
+}
+
+.notification-group.collapsed:hover .notification-row:not(:only-child) .notification {
+    background-color: alpha(var(--background), 1);
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+  -gtk-icon-filter: none;
+  background: transparent;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  margin-bottom: 10px;
+}
+
+.notification-group .notification-group-headers .notification-group-header {
+  margin: 1rem;
+}
