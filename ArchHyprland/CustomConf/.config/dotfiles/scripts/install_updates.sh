@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# By: Stephan Raabe
+# By: Daniele Bertagnoli
 
 #  _    _ _____  _____       _______ ______  _____ 
 # | |  | |  __ \|  __ \   /\|__   __|  ____|/ ____|
