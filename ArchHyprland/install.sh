@@ -50,6 +50,7 @@ pacman_packages=(
     hyprland
     waybar
     hyprpaper
+    hypridle
     starship
     rofi-wayland
     python-pywal
