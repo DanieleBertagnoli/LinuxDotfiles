@@ -6,7 +6,7 @@ Feel free to open issues or contact me to discuss any bugs, problems, or potenti
 These dotfiles are built inspired by the huge GitHub project [ML4FW Dotfiles](https://github.com/mylinuxforwork/dotfiles). My dotfiles are developed to reduce the useless packages, providing a lighter installation, yet fully configured and customizable. To start, run the following commands
 ```ssh
 # Clone the repository
-git clone https://github.com/DanieleBertagnoli/ArchHyrplandDotfiles
+git clone https://github.com/DanieleBertagnoli/ArchHyprlandDotfiles
 cd ArchHyrplandDotfiles/ArchHyprland
 
 # Run the script
